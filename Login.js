@@ -48,7 +48,7 @@ const Login = () => {
       <TouchableOpacity onPress={handleLogin} style={[styles.button, styles.loginButton]}>
         <Text style={styles.buttonText}>Login</Text>
       </TouchableOpacity>
-      <Text style={styles.alreadyHaveAccountText}>Already have an account?</Text>
+      <Text style={styles.alreadyHaveAccountText}>Don't have an account?</Text>
       <TouchableOpacity onPress={handleSignUp} style={[styles.button, styles.signUpButton]}>
         <Text style={styles.buttonText}>Sign Up</Text>
       </TouchableOpacity>
