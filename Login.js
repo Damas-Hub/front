@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, TextInput, TouchableOpacity, Image, Text, StyleSheet } from 'react-native';
+import { View, TextInput, TouchableOpacity, Image, Text, StyleSheet, KeyboardAvoidingView } from 'react-native';
 
 const Login = () => {
   const [indexNumber, setIndexNumber] = useState('');
@@ -23,7 +23,7 @@ const Login = () => {
   };
 
   return (
-    <View style={styles.container}>
+    <KeyboardAvoidingView style={styles.container} behavior="padding">
       <Text style={styles.welcomeText}>WELCOME BACK</Text>
       <Image
         source={require('./assets/images/login.jpeg')} // Replace with your image path
@@ -43,16 +43,20 @@ const Login = () => {
         secureTextEntry
       />
       <TouchableOpacity onPress={handleForgotPassword}>
-        <Text style={styles.forgotPasswordText}>Forgot Password</Text>
+        <Text style={[styles.forgotPasswordText, styles.blueText]}>Forgot Password</Text>
       </TouchableOpacity>
+      <View style={styles.space} />
       <TouchableOpacity onPress={handleLogin} style={[styles.button, styles.loginButton]}>
         <Text style={styles.buttonText}>Login</Text>
       </TouchableOpacity>
-      <Text style={styles.alreadyHaveAccountText}>Don't have an account?</Text>
-      <TouchableOpacity onPress={handleSignUp} style={[styles.button, styles.signUpButton]}>
-        <Text style={styles.buttonText}>Sign Up</Text>
-      </TouchableOpacity>
-    </View>
+      <View style={styles.space} />
+      <View style={styles.signupContainer}>
+        <Text style={styles.alreadyHaveAccountText}>Don't have an account?</Text>
+        <TouchableOpacity onPress={handleSignUp} style={styles.textButton}>
+          <Text style={[styles.buttonText, styles.blueText]}>Sign Up</Text>
+        </TouchableOpacity>
+      </View>
+    </KeyboardAvoidingView>
   );
 };
 
@@ -68,6 +72,12 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center',
     marginBottom: 24,
+    color: 'black', // Change the text color to black
+    fontStyle: 'italic', // Add italic font style
+    letterSpacing: 2, // Add letter spacing
+    textShadowColor: '#000',
+    textShadowOffset: { width: 1, height: 1 },
+    textShadowRadius: 2,
   },
   images: {
     width: 200,
@@ -102,18 +112,32 @@ const styles = StyleSheet.create({
   loginButton: {
     backgroundColor: '#000080',
   },
-  alreadyHaveAccountText: {
-    textAlign: 'center',
+  signupContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
     marginBottom: 8,
-    textDecorationLine: 'underline',
   },
-  signUpButton: {
-    backgroundColor: '#FFA500',
+  alreadyHaveAccountText: {
+    marginRight: 8,
+    fontSize: 16,
+  },
+  textButton: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  blueText: {
+    color: '#006994', // Change the color to blue
+    fontSize: 16,
+    fontWeight: 'bold',
   },
   buttonText: {
     color: 'white',
     fontSize: 20,
     fontWeight: 'bold',
+  },
+  space: {
+    height: 16, // Adjust the height as needed
   },
 });
 

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, TextInput, Button, Image, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, TextInput, Image, Text, TouchableOpacity, StyleSheet } from 'react-native';
 
 const Signup = () => {
   const [indexNumber, setIndexNumber] = useState('');
@@ -16,7 +16,7 @@ const Signup = () => {
 
   const handleLogin = () => {
     // Perform login logic here
-    console.log('Login button pressed');
+    console.log('Login text clicked');
     console.log('Index Number:', indexNumber);
     console.log('Password:', password);
   };
@@ -31,29 +31,33 @@ const Signup = () => {
       <TextInput
         style={styles.input}
         placeholder="Name"
-        onChangeText={text => setName(text)}
+        onChangeText={(text) => setName(text)}
         value={name}
       />
       <TextInput
         style={styles.input}
         placeholder="Index Number"
-        onChangeText={text => setIndexNumber(text)}
+        onChangeText={(text) => setIndexNumber(text)}
         value={indexNumber}
       />
       <TextInput
         style={styles.input}
         placeholder="Password"
-        onChangeText={text => setPassword(text)}
+        onChangeText={(text) => setPassword(text)}
         value={password}
         secureTextEntry
       />
+      <View style={styles.space} />
       <TouchableOpacity onPress={handleSignUp} style={[styles.button, styles.signUpButton]}>
         <Text style={styles.buttonText}>Sign Up</Text>
       </TouchableOpacity>
-      <Text style={styles.alreadyHaveAccountText}>Already have an account?</Text>
-      <TouchableOpacity onPress={handleLogin} style={[styles.button, styles.loginButton]}>
-        <Text style={styles.buttonText}>Login</Text>
-      </TouchableOpacity>
+      <View style={styles.space} />
+      <View style={styles.loginContainer}>
+        <Text style={[styles.alreadyHaveAccountText, styles.redText]}>Already have an account?</Text>
+        <TouchableOpacity onPress={handleLogin}>
+          <Text style={styles.loginText}>Login</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
@@ -70,6 +74,12 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center',
     marginBottom: 24,
+    textTransform: 'uppercase', // Convert the text to uppercase
+    letterSpacing: 2, // Add letter spacing
+    color: '#333', // Change the text color
+    textShadowColor: '#000',
+    textShadowOffset: { width: 1, height: 1 },
+    textShadowRadius: 2,
   },
   images: {
     width: 200,
@@ -89,9 +99,23 @@ const styles = StyleSheet.create({
     marginTop: 8,
   },
   alreadyHaveAccountText: {
+    fontSize: 16,
     textAlign: 'center',
     marginTop: 8,
+    marginBottom: 8,
     textDecorationLine: 'underline',
+  },
+  loginContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 8,
+  },
+  loginText: {
+    color: 'blue',
+    fontSize: 16,
+    fontWeight: 'bold',
+    marginLeft: 8,
   },
   button: {
     height: 45,
@@ -101,15 +125,18 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   signUpButton: {
-    backgroundColor: '#FFA500',
-  },
-  loginButton: {
-    backgroundColor: '#000080',
+    backgroundColor: '#006994',
   },
   buttonText: {
     color: 'white',
     fontSize: 20,
     fontWeight: 'bold',
+  },
+  space: {
+    height: 16, // Adjust the height as needed
+  },
+  redText: {
+    color: '#006994',
   },
 });
 
