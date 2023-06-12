@@ -1,43 +1,83 @@
-import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import React, { useEffect, useRef } from 'react';
+import { View, ScrollView, Text, StyleSheet, StatusBar, Animated } from 'react-native';
 
 const TimeTable = () => {
   const timetableData = [
-    { day: 'Mon', time: '9:00 AM - 11:00 AM', course: 'Artificial Intelligence', lecturer: 'Dr. Appiah Ben', venue: 'Digital' },
-    { day: 'Tue', time: '10:30 AM - 12:30 PM', course: 'Management Information System', lecturer: 'Mr. Adolph Adu', venue: 'Wings' },
-    { day: 'Wed', time: '2:00 PM - 4:00 PM', course: 'Computer Security', lecturer: 'Dr. Appiah Ben', venue: 'Digital' },
-    { day: 'Thu', time: '11:00 AM - 1:00 PM', course: 'Android Development', lecturer: 'Mr. Bill Frimpong', venue: 'Main Octagon' },
-    { day: 'Fri', time: '1:30 PM - 3:30 PM', course: 'Embedded Systems', lecturer: 'Mr. Bill Frimpong', venue: 'Wings' },
+    { day: 'Monday', venue: 'Main Octagon', lecturer: 'John Doe', time: '09:00 AM - 11:00 AM', color: '#FF5733', courseName: 'Introduction to Computer Science' },
+    { day: 'Tuesday', venue: 'Digital', lecturer: 'Jane Smith', time: '11:00 AM - 01:00 PM', color: '#33FFBD', courseName: 'Data Structures and Algorithms' },
+    { day: 'Wednesday', venue: 'Wings', lecturer: 'Mike Johnson', time: '02:00 PM - 04:00 PM', color: '#337EFF', courseName: 'Web Development' },
+    { day: 'Thursday', venue: 'Main Octagon', lecturer: 'Sarah Lee', time: '10:00 AM - 12:00 PM', color: '#FF33B6', courseName: 'Database Management' },
+    { day: 'Friday', venue: 'Digital', lecturer: 'Alex Brown', time: '01:00 PM - 03:00 PM', color: '#FFBD33', courseName: 'Software Engineering' },
   ];
 
-  const filteredTimetableData = timetableData.filter(item => (
-    ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'].includes(item.day) &&
-    !(item.day === 'Tue' && item.time === '1:00 PM - 3:00 PM') &&
-    !(item.day === 'Thu' && item.time === '2:30 PM - 4:30 PM')
-  ));
+  const fadeAnim = useRef(new Animated.Value(0)).current;
+  const scaleAnim = useRef(new Animated.Value(0)).current;
+  const slideAnim = useRef(new Animated.Value(-100)).current;
+
+  useEffect(() => {
+    Animated.parallel([
+      Animated.timing(fadeAnim, {
+        toValue: 1,
+        duration: 1000,
+        useNativeDriver: true,
+      }),
+      Animated.timing(scaleAnim, {
+        toValue: 1,
+        duration: 1000,
+        useNativeDriver: true,
+      }),
+      Animated.timing(slideAnim, {
+        toValue: 0,
+        duration: 1000,
+        useNativeDriver: true,
+      }),
+    ]).start();
+  }, [fadeAnim, scaleAnim, slideAnim]);
 
   return (
     <View style={styles.container}>
-      <Text style={styles.headerText}>TIMETABLE FOR COMPUTER SCIENCE L300 - SECOND SEMESTER</Text>
-      <View style={styles.space}></View>
-      <View style={styles.table}>
-        <View style={styles.headerRow}>
-          <Text style={styles.headerCell}>Day</Text>
-          <Text style={styles.headerCell}>Time</Text>
-          <Text style={styles.headerCell}>Course</Text>
-          <Text style={styles.headerCell}>Lecturer</Text>
-          <Text style={styles.headerCell}>Venue</Text>
-        </View>
-        {filteredTimetableData.map((item, index) => (
-          <View key={index} style={styles.row}>
-            <Text style={styles.cell}>{item.day}</Text>
-            <Text style={styles.cell}>{item.time}</Text>
-            <Text style={styles.cell}>{item.course}</Text>
-            <Text style={styles.cell}>{item.lecturer}</Text>
-            <Text style={styles.cell}>{item.venue}</Text>
-          </View>
-        ))}
+      <StatusBar backgroundColor="#ffffff" barStyle="dark-content" />
+      <View style={styles.titleContainer}>
+        <Text style={styles.title}>{"\n"}<Text style={styles.titleText}>Time Table for Computer Science L300- Second Semester</Text></Text>
       </View>
+      <ScrollView>
+        {timetableData.map((item, index) => (
+          <Animated.View
+            key={index}
+            style={[
+              styles.itemContainer,
+              {
+                backgroundColor: item.color,
+                opacity: fadeAnim,
+                transform: [
+                  { scale: scaleAnim },
+                  { translateX: slideAnim },
+                ],
+              },
+            ]}
+          >
+            <View style={[styles.dayContainer, { backgroundColor: '#ccc' }]}>
+              <Text style={styles.day}>{item.day}</Text>
+            </View>
+            <View style={styles.row}>
+              <Text style={styles.subtitle}>Venue:</Text>
+              <Text style={styles.text}>{item.venue}</Text>
+            </View>
+            <View style={styles.row}>
+              <Text style={styles.subtitle}>Lecturer:</Text>
+              <Text style={styles.text}>{item.lecturer}</Text>
+            </View>
+            <View style={styles.row}>
+              <Text style={styles.subtitle}>Time:</Text>
+              <Text style={styles.text}>{item.time}</Text>
+            </View>
+            <View style={styles.row}>
+              <Text style={styles.subtitle}>Course:</Text>
+              <Text style={styles.text}>{item.courseName}</Text>
+            </View>
+          </Animated.View>
+        ))}
+      </ScrollView>
     </View>
   );
 };
@@ -45,47 +85,52 @@ const TimeTable = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 16,
+    padding: 10,
     backgroundColor: '#ADD8E6',
   },
-  headerText: {
+  titleContainer: {
+    alignItems: 'center',
+    marginBottom: 20,
+  },
+  title: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+  titleText: {
     fontSize: 24,
     fontWeight: 'bold',
-    marginBottom: 16,
-    textAlign: 'center',
   },
-  space: {
-    marginTop: 20,
+  itemContainer: {
+    padding: 10,
+    marginBottom: 10,
+    borderRadius: 10,
   },
-  table: {
-    flex: 1,
-    borderWidth: 1,
-    borderColor: 'gray',
-    borderRadius: 8,
-    overflow: 'hidden',
+  dayContainer: {
+    borderRadius: 10,
+    marginBottom: 5,
+    paddingVertical: 5,
   },
-  headerRow: {
-    flexDirection: 'row',
-    backgroundColor: '#F0F0F0',
-  },
-  headerCell: {
-    flex: 1,
-    padding: 8,
+  day: {
+    fontSize: 20,
     fontWeight: 'bold',
+    color: 'white',
     textAlign: 'center',
-    fontSize: 18,
   },
   row: {
     flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 5,
   },
-  cell: {
-    flex: 1,
-    padding: 8,
-    borderWidth: 1,
-    borderColor: 'gray',
-    textAlign: 'center',
+  subtitle: {
     fontSize: 16,
-    color: 'black',
+    fontWeight: 'bold',
+    color: 'white',
+    marginRight: 10,
+  },
+  text: {
+    fontSize: 16,
+    color: 'white',
   },
 });
 

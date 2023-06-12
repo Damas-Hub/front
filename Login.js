@@ -12,11 +12,6 @@ const Login = () => {
     console.log('Password:', password);
   };
 
-  const handleSignUp = () => {
-    // Perform sign-up logic here
-    console.log('Sign Up button pressed');
-  };
-
   const handleForgotPassword = () => {
     // Handle the Forgot Password action here
     console.log('Forgot Password clicked');
@@ -49,13 +44,6 @@ const Login = () => {
       <TouchableOpacity onPress={handleLogin} style={[styles.button, styles.loginButton]}>
         <Text style={styles.buttonText}>Login</Text>
       </TouchableOpacity>
-      <View style={styles.space} />
-      <View style={styles.signupContainer}>
-        <Text style={styles.alreadyHaveAccountText}>Don't have an account?</Text>
-        <TouchableOpacity onPress={handleSignUp} style={styles.textButton}>
-          <Text style={[styles.buttonText, styles.blueText]}>Sign Up</Text>
-        </TouchableOpacity>
-      </View>
     </KeyboardAvoidingView>
   );
 };
@@ -111,20 +99,6 @@ const styles = StyleSheet.create({
   },
   loginButton: {
     backgroundColor: '#000080',
-  },
-  signupContainer: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginBottom: 8,
-  },
-  alreadyHaveAccountText: {
-    marginRight: 8,
-    fontSize: 16,
-  },
-  textButton: {
-    justifyContent: 'center',
-    alignItems: 'center',
   },
   blueText: {
     color: '#006994', // Change the color to blue
