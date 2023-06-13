@@ -1,8 +1,8 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import Splash from './Splash';
-import Login from './Login';
+import Splash from './screens/Splash';
+import Login from './screens/Login';
 import Update from './DrawerScreens/Update';
 import TimeTable from './BottomScreens/TimeTable';
 import Calendar from './DrawerScreens/Calendar';
@@ -15,7 +15,7 @@ const Auth = () => {
       screenOptions={{
         headerShown: false,
       }}
-      initialRouteName="Calendar"
+      initialRouteName="Splash"
     >
       <Stack.Screen name="Splash" component={Splash} />
       <Stack.Screen name="Login" component={Login} />

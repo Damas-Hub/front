@@ -13,7 +13,7 @@ const Splash = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <Image
-        source={require('./assets/images/htu1.png')}
+        source={require('./images/htu1.png')}
         style={styles.logo}
         resizeMode="contain"
       />

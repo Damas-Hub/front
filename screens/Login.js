@@ -21,7 +21,7 @@ const Login = () => {
     <KeyboardAvoidingView style={styles.container} behavior="padding">
       <Text style={styles.welcomeText}>WELCOME BACK</Text>
       <Image
-        source={require('./assets/images/login.jpeg')}  
+        source={require('./images/login.jpeg')}  
         style={styles.images}
       />
       <TextInput
