@@ -6,6 +6,7 @@ import Login from './screens/Login';
 import Update from './DrawerScreens/Update';
 import TimeTable from './BottomScreens/TimeTable';
 import Calendar from './DrawerScreens/Calendar';
+import Fees from './DrawerScreens/Fees';
 
 const Stack = createStackNavigator();
 
@@ -22,6 +23,7 @@ const Auth = () => {
       <Stack.Screen name="Update" component={Update} />
       <Stack.Screen name="TimeTable" component={TimeTable} />
       <Stack.Screen name="Calendar" component={Calendar} />
+      <Stack.Screen name="Fees" component={Fees} />
     </Stack.Navigator>
   );
 };
