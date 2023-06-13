@@ -1,12 +1,11 @@
-import React from "react";
-import Splash from "./Splash";
-import Login from "./Login";
-import Dashboard from "./screens/Dashboard";
-import Home from "./BottomScreens/Home";
-import TimeTable from "./BottomScreens/TimeTable";
-import Profile from "./BottomScreens/Profile";
-import Calendar from "./DrawerScreens/Calendar";
-import { createStackNavigator } from "@react-navigation/stack";
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import Splash from './Splash';
+import Login from './Login';
+import Update from './DrawerScreens/Update';
+import TimeTable from './BottomScreens/TimeTable';
+import Calendar from './DrawerScreens/Calendar';
 
 const Stack = createStackNavigator();
 
@@ -16,15 +15,22 @@ const Auth = () => {
       screenOptions={{
         headerShown: false,
       }}
-      initialRouteName="Profile"
+      initialRouteName="Calendar"
     >
       <Stack.Screen name="Splash" component={Splash} />
       <Stack.Screen name="Login" component={Login} />
-      <Stack.Screen name="Home" component={Home} />
+      <Stack.Screen name="Update" component={Update} />
       <Stack.Screen name="TimeTable" component={TimeTable} />
-      <Stack.Screen name="Profile" component={Profile} />
       <Stack.Screen name="Calendar" component={Calendar} />
     </Stack.Navigator>
+  );
+};
+
+const App = () => {
+  return (
+    <NavigationContainer>
+      <Auth />
+    </NavigationContainer>
   );
 };
 

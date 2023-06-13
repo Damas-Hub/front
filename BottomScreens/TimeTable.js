@@ -3,11 +3,11 @@ import { View, ScrollView, Text, StyleSheet, StatusBar, Animated } from 'react-n
 
 const TimeTable = () => {
   const timetableData = [
-    { day: 'Monday', venue: 'Main Octagon', lecturer: 'John Doe', time: '09:00 AM - 11:00 AM', color: '#FF5733', courseName: 'Introduction to Computer Science' },
-    { day: 'Tuesday', venue: 'Digital', lecturer: 'Jane Smith', time: '11:00 AM - 01:00 PM', color: '#33FFBD', courseName: 'Data Structures and Algorithms' },
-    { day: 'Wednesday', venue: 'Wings', lecturer: 'Mike Johnson', time: '02:00 PM - 04:00 PM', color: '#337EFF', courseName: 'Web Development' },
-    { day: 'Thursday', venue: 'Main Octagon', lecturer: 'Sarah Lee', time: '10:00 AM - 12:00 PM', color: '#FF33B6', courseName: 'Database Management' },
-    { day: 'Friday', venue: 'Digital', lecturer: 'Alex Brown', time: '01:00 PM - 03:00 PM', color: '#FFBD33', courseName: 'Software Engineering' },
+    { day: 'Monday', venue: 'Main Octagon', lecturer: 'Dr. Appiah Ben', time: '09:00 AM - 11:00 AM', color: '#337EFF', courseName: 'Computer Security' },
+    { day: 'Tuesday', venue: 'Digital', lecturer: 'Mr. Adolph Edu', time: '11:00 AM - 01:00 PM', color: '#337EFF', courseName: 'Data Structures and Algorithms' },
+    { day: 'Wednesday', venue: 'Wings', lecturer: 'Mr. Bill Frimpong', time: '02:00 PM - 04:00 PM', color: '#337EFF', courseName: 'Web Development' },
+    { day: 'Thursday', venue: 'Main Octagon', lecturer: 'Mr. Sackey Kofi', time: '10:00 AM - 12:00 PM', color: '#337EFF', courseName: 'Database Management' },
+    { day: 'Friday', venue: 'Digital', lecturer: 'Mad. Akosua Hanson', time: '01:00 PM - 03:00 PM', color: '#337EFF', courseName: 'Software Engineering' },
   ];
 
   const fadeAnim = useRef(new Animated.Value(0)).current;
@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 10,
-    backgroundColor: '#ADD8E6',
+    
   },
   titleContainer: {
     alignItems: 'center',
