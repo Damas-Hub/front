@@ -3,6 +3,7 @@ import Auth from "./Auth";
 import { NavigationContainer,  } from "@react-navigation/native";
 
 
+
 const App = () => {
   return (
     <NavigationContainer>

@@ -1,61 +1,401 @@
-import React from 'react';
+import React, { useState, useEffect } from "react";
 import {
-    TouchableOpacity,
-    ScrollView,
-    Text,
-    View,
-    Image,
-} from 'react-native';
-import {createDrawerNavigator} from '@react-navigation/drawer';
-import BottomTabNavigator from './BottomTabNavigator';
-import {SafeAreaView} from 'react-native-safe-area-context';
-import {useNavigation} from '@react-navigation/native';
+  TouchableOpacity,
+  ScrollView,
+  Text,
+  View,
+  Image,
+  Modal,
+} from "react-native";
+import { createDrawerNavigator } from "@react-navigation/drawer";
+import BottomTabNavigator from "./BottomTabNavigator";
+import Attendance from "../DrawerScreens/Attendance";
+import Calendar from "../DrawerScreens/Calendar";
+import Fees from "../DrawerScreens/Fees";
+import Quiz from "../DrawerScreens/Quiz";
+import Update from "../DrawerScreens/Update";
+import Logout from "../screens/Logout";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { useNavigation } from "@react-navigation/native";
 
 const Drawer = createDrawerNavigator();
-const CustomDrawerContent = (props)=>{
-    
-    const navigation = useNavigation();
 
-    return(
-        <SafeAreaView
-        style={{flex:1, backgroundColor:"#fff"}}
-        >
-        <View
+
+const CustomDrawerContent = (props) => {
+  const navigation = useNavigation();
+  const [modalVisible, setModalVisible] = useState(false);
+  const [username, setUsername] = useState("Loading");
+  const [email, setEmail] = useState("Loading");
+
+
+  return (
+    <SafeAreaView style={{ flex: 1, backgroundColor: "#fff" }}>
+      {/* Image Profile View */}
+      <View
         style={{
-            height:60,
-            alignItems:"center",
-            justifyContent: "center",
+          height: 160,
+          alignItems: "center",
+          justifyContent: "center",
         }}
+      >
+        {/* Image container and User name Appearance */}
+        <View
+          style={{
+            borderBottomColor: "#6b7280",
+            borderBottomWidth: 1,
+            flexDirection: "row",
+            paddingBottom: 10,
+            alignItems: "center",
+            marginBottom: -35,
+          }}
         >
+          <Image
+            style={{
+              marginBottom: 5,
+              height: 65,
+              width: 65,
+            }}
+            source={require( "./icons/student.png")}
+          />
+        </View>
+      </View>
+
+      <ScrollView
+        style={{
+          marginLeft: 5,
+        }}
+      >
+        {/* Users details callback */}
+        <View>
+          <Text
+            style={{
+              justifyContent: "center",
+              fontSize: 17,
+              fontWeight: "bold",
+              marginBottom: 5,
+              textAlign: "center",
+              color: "#333",
+            }}
+          >
+            {username}
+          </Text>
+          <Text
+            style={{
+              justifyContent: "center",
+              fontSize: 13,
+              fontWeight: "normal",
+              marginBottom: 20,
+              textAlign: "center",
+              color: "#9CA3AF",
+            }}
+          >
+            {email}
+          </Text>
         </View>
 
-        <ScrollView
-        style={{marginLeft:5}}
-        >
-
+        {/* Home Tab */}
         <TouchableOpacity
-        style={{
-            marginTop:25,
+          style={{
+            marginTop: 25,
             flexDirection: "row",
-            marginBottom:20,
+            marginBottom: 20,
             marginLeft: 10,
             alignItems: "center",
-        }}
+          }}
+          onPress={() => props.navigation.navigate("Calendar")}
         >
-        <Image
-        style={{
-            width: 40,
-            height: 40,
-            marginLeft: 10,
-        }}
-        source={require(".././assets")}
-         />
-
+          <Image
+            style={{
+              width: 30,
+              height: 30,
+              marginLeft: 15,
+            }}
+            source={require( "./icons/calendar.png")}
+            resizeMode="contain"
+          />
+          <Text
+            style={{
+              marginLeft: 20,
+              fontSize: 16,
+              color: "#333",
+              fontWeight: "bold",
+            }}
+          >
+                Calendar
+          </Text>
         </TouchableOpacity>
 
-        </ScrollView>
+        {/* Records Tab */}
+        <TouchableOpacity
+          style={{
+            marginTop: 10,
+            flexDirection: "row",
+            marginBottom: 20,
+            marginLeft: 10,
+            alignItems: "center",
+          }}
+          onPress={() => props.navigation.navigate("Attendance")}
+        >
+          <Image
+            style={{
+              width: 30,
+              height: 30,
+              marginLeft: 15,
+            }}
+            source={require( "./icons/attendace.png")}
+            resizeMode="contain"
+          />
+          <Text
+            style={{
+              marginLeft: 20,
+              fontSize: 16,
+              color: "#333",
+              fontWeight: "bold",
+            }}
+          >
+            Attendance
+          </Text>
+        </TouchableOpacity>
 
-        </SafeAreaView>
-    )
+        {/* View Records Tab */}
+        <TouchableOpacity
+          style={{
+            marginTop: 10,
+            flexDirection: "row",
+            marginBottom: 20,
+            marginLeft: 10,
+            alignItems: "center",
+          }}
+          onPress={() => props.navigation.navigate("Fees")}
+        >
+          <Image
+            style={{
+              width: 30,
+              height: 30,
+              marginLeft: 15,
+              tintColor: "#007bff",
+            }}
+            source={require( "./icons/fees.png")}
+            resizeMode="contain"
+          />
+          <Text
+            style={{
+              marginLeft: 20,
+              fontSize: 16,
+              color: "#333",
+              fontWeight: "bold",
+            }}
+          >
+           Fees
+          </Text>
+        </TouchableOpacity>
 
-}
+        {/* Records Update Section */}
+        <TouchableOpacity
+          style={{
+            marginTop: 10,
+            flexDirection: "row",
+            marginBottom: 20,
+            marginLeft: 10,
+            alignItems: "center",
+          }}
+          onPress={() => props.navigation.navigate("Quiz")}
+        >
+          <Image
+            style={{
+              width: 30,
+              height: 30,
+              marginLeft: 15,
+            }}
+            source={require( "./icons/quiz.png")}
+            resizeMode="contain"
+          />
+          <Text
+            style={{
+              marginLeft: 20,
+              fontSize: 16,
+              color: "#333",
+              fontWeight: "bold",
+            }}
+          >
+            Quiz
+          </Text>
+        </TouchableOpacity>
+
+        {/* Settings Section */}
+        <TouchableOpacity
+          style={{
+            marginTop: 10,
+            flexDirection: "row",
+            marginBottom: 20,
+            marginLeft: 10,
+            alignItems: "center",
+          }}
+          onPress={() => props.navigation.navigate("Update")}
+        >
+          <Image
+            style={{
+              width: 30,
+              height: 30,
+              marginLeft: 15,
+            }}
+            source={require( "./icons/student.png")}
+            resizeMode="contain"
+          />
+          <Text
+            style={{
+              marginLeft: 20,
+              fontSize: 16,
+              color: "#333",
+              fontWeight: "bold",
+            }}
+          >
+            Update
+          </Text>
+        </TouchableOpacity>
+      </ScrollView>
+
+      {/* Logout Tab */}
+      <TouchableOpacity
+        style={{
+          flexDirection: "row",
+          marginBottom: 100,
+          marginLeft: 10,
+          alignItems: "center",
+        }}
+        onPress={() => {
+          props.navigation.closeDrawer();
+          setModalVisible(true);
+        }}
+      >
+        <Image
+          style={{ width: 35, height: 35, marginLeft: 20 }}
+          source={require( "./icons/logout.png")}
+          resizeMode="contain"
+        />
+        <Text
+          style={{
+            marginLeft: 20,
+            fontSize: 17,
+            color: "#333",
+            fontWeight: "bold",
+          }}
+        >
+          Logout
+        </Text>
+      </TouchableOpacity>
+      <Modal visible={modalVisible} animationType="fade" transparent>
+        <View
+          style={{
+            flex: 1,
+            justifyContent: "center",
+            alignItems: "center",
+            backgroundColor: "rgba(0, 0, 0, 0.5)",
+          }}
+        >
+          <View
+            style={{
+              backgroundColor: "#fff",
+              padding: 20,
+              borderRadius: 15,
+              width: "80%",
+            }}
+          >
+            <Text
+              style={{ fontSize: 20, fontWeight: "bold", marginBottom: 10 }}
+            >
+              Logout
+            </Text>
+            <Text style={{ marginBottom: 15 }}>
+              Are you sure you want to Logout?
+            </Text>
+            <View
+              style={{ flexDirection: "row", justifyContent: "space-around" }}
+            >
+              <TouchableOpacity
+                style={{
+                  backgroundColor: "blue",
+                  padding: 10,
+                  borderRadius: 5,
+                  width: "25%",
+                }}
+                onPress={() => setModalVisible(false)}
+              >
+                <Text style={{ color: "#fff", textAlign: "center" }}>No</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={{
+                  backgroundColor: "red",
+                  padding: 10,
+                  borderRadius: 5,
+                  width: "25%",
+                }}
+                onPress={() => {
+                  setModalVisible(false);
+                  Signout(props);
+                }}
+              >
+                <Text style={{ color: "#fff", textAlign: "center" }}>Yes</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </View>
+      </Modal>
+    </SafeAreaView>
+  );
+};
+
+const SideDrawer = () => {
+  return (
+    <Drawer.Navigator
+      drawerContent={(props) => CustomDrawerContent(props)}
+      initialRouteName="Home"
+    >
+
+      <Drawer.Screen
+        name="Home"
+        component={BottomTabNavigator}
+        options={{ headerShown: false }}
+      />
+
+      <Drawer.Screen
+        name="Attendance"
+        component={Attendance}
+        options={{ headerShown: false }}
+      />
+       <Drawer.Screen
+        name="Calendar"
+        component={Calendar}
+        options={{ headerShown: false }}
+      />
+
+
+      <Drawer.Screen
+        name="Fees"
+        component={Fees}
+        options={{ headerShown: false }}
+      />
+
+      <Drawer.Screen
+        name="Update"
+        component={Update}
+        options={{ headerShown: false }}
+      />
+
+      <Drawer.Screen
+        name="Quiz"
+        component={Quiz}
+        options={{ headerShown: false }}
+      />
+
+      <Drawer.Screen
+        name="Logout"
+        component={Logout}
+        options={{ headerShown: false }}
+      />
+
+    </Drawer.Navigator>
+  );
+};
+
+export default SideDrawer;

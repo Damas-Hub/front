@@ -1,34 +1,69 @@
-import * as React from 'react';
-import { Button, View } from 'react-native';
-// import { createDrawerNavigator, NavigationContainer } from '@react-navigation/native';
-import { createDrawerNavigator } from '@react-navigation/drawer';
+import React from "react";
+import { View, Text, Image, TouchableOpacity, StyleSheet } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
-function HomeScreen({ navigation }) {
+const CustomDrawer = ({ title, isHome }) => {
+  const navigation = useNavigation();
+
+  const goBack = () => {
+    navigation.goBack();
+  };
+
+  // Opening a navigation Drawer
+  const openDrawer = () => {
+    navigation.openDrawer();
+  };
+
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Button
-        onPress={() => navigation.navigate('Notifications')}
-        title="Go to notifications"
-      />
+    <View
+      style={{
+        flexDirection: "row",
+        height: 50,
+        backgroundColor: "#E7EAEA",
+      }}
+    >
+      {isHome ? (
+        <TouchableOpacity
+          onPress={openDrawer}
+          style={{ flex: 1, justifyContent: "center" }}
+        >
+          <Image
+            style={{ width: 30, height: 30, marginLeft: 10 }}
+            source={require("./icons/home.png")}
+            resizeMode="contain"
+          />
+        </TouchableOpacity>
+      ) : (
+        <TouchableOpacity
+          onPress={goBack}
+          style={{ flexDirection: "row", alignItems: "center" }}
+        >
+          <Image
+            style={{ width: 25, height: 25, marginLeft: 10 }}
+            source={require("./icons/left.png")}
+            resizeMode="contain"
+          />
+          <Text style={styles.Back}>Back</Text>
+        </TouchableOpacity>
+      )}
+
+      {/* Header View */}
+      <View
+        style={{
+          flex: 25,
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+      </View>
     </View>
-  );
-}
-
-function NotificationsScreen({ navigation }) {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Button onPress={() => navigation.goBack()} title="Go back home" />
-    </View>
-  );
-}
-
-const Drawer = createDrawerNavigator();
-
-export default function App() {
-  return (
-    <Drawer.Navigator initialRouteName="Home">
-      <Drawer.Screen name="Home" component={HomeScreen} />
-      <Drawer.Screen name="Notifications" component={NotificationsScreen} />
-    </Drawer.Navigator>
   );
 };
+
+const styles = StyleSheet.create({
+  Back: {
+    marginLeft: 5,
+  },
+});
+
+export default CustomDrawer;

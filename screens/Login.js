@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     padding: 16,
-    backgroundColor: '#ADD8E6', // Set background color to grey
+    // backgroundColor: '#ADD8E6', // Set background color to grey
   },
   welcomeText: {
     fontSize: 24,

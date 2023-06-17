@@ -1,4 +1,5 @@
 import React from "react";
+ 
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import Splash from "./screens/Splash";
@@ -10,6 +11,9 @@ import Quiz from "./DrawerScreens/Quiz";
 import Attendance from "./DrawerScreens/Attendance";
 import Fees from "./DrawerScreens/Fees";
 import BottomTabNavigator from "./Navigation/BottomTabNavigator";
+import CustomDrawer from "./Navigation/CustomDrawer";
+import SideDrawer from "./Navigation/SideDrawer";
+
 import Home from "./BottomScreens/Home";
 // import CustomDrawer from "./Navigation/CustomDrawer";
 
@@ -21,7 +25,7 @@ const Auth = () => {
       screenOptions={{
         headerShown: false,
       }}
-      initialRouteName="Quiz"
+      initialRouteName="BottomTabNavigator"
     >
       <Stack.Screen name="Splash" component={Splash} />
       <Stack.Screen name="Login" component={Login} />
@@ -33,6 +37,9 @@ const Auth = () => {
       <Stack.Screen name="Home" component={Home} />
       <Stack.Screen name="Attendance" component={Attendance} />
       <Stack.Screen name="Quiz" component={Quiz} />
+      <Stack.Screen name="CustomDrawer" component={CustomDrawer} />
+      <Stack.Screen name="SideDrawer" component={SideDrawer} />
+
       
 
     </Stack.Navigator>
