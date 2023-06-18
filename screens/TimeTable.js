@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { View, ScrollView, Text, StyleSheet, StatusBar, Animated } from 'react-native';
+ 
 
 const TimeTable = () => {
   const timetableData = [
@@ -35,6 +36,7 @@ const TimeTable = () => {
   }, [fadeAnim, scaleAnim, slideAnim]);
 
   return (
+    
     <View style={styles.container}>
       <StatusBar backgroundColor="#ffffff" barStyle="dark-content" />
       <View style={styles.titleContainer}>
@@ -76,8 +78,11 @@ const TimeTable = () => {
               <Text style={styles.text}>{item.courseName}</Text>
             </View>
           </Animated.View>
+          
         ))}
+         
       </ScrollView>
+      <SideDrawer/>
     </View>
   );
 };

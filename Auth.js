@@ -1,56 +1,33 @@
 import React from "react";
- 
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import Splash from "./screens/Splash";
-import Login from "./screens/Login";
-import Update from "./DrawerScreens/Update";
-import TimeTable from "./BottomScreens/TimeTable";
-import Calendar from "./DrawerScreens/Calendar";
-import Quiz from "./DrawerScreens/Quiz";
-import Attendance from "./DrawerScreens/Attendance";
-import Fees from "./DrawerScreens/Fees";
-import BottomTabNavigator from "./Navigation/BottomTabNavigator";
-import CustomDrawer from "./Navigation/CustomDrawer";
-import SideDrawer from "./Navigation/SideDrawer";
+ import Splash from './Splash';
+ import Login from "./Login";
+import BottomTabNavigator from './Navigation/BottomTabNavigator';
 
-import Home from "./BottomScreens/Home";
-// import CustomDrawer from "./Navigation/CustomDrawer";
+
 
 const Stack = createStackNavigator();
 
 const Auth = () => {
   return (
     <Stack.Navigator
+      initialRouteName="BottomTabNavigator"
       screenOptions={{
         headerShown: false,
       }}
-      initialRouteName="BottomTabNavigator"
     >
       <Stack.Screen name="Splash" component={Splash} />
       <Stack.Screen name="Login" component={Login} />
-      <Stack.Screen name="Update" component={Update} />
-      <Stack.Screen name="TimeTable" component={TimeTable} />
-      <Stack.Screen name="Calendar" component={Calendar} />
-      <Stack.Screen name="Fees" component={Fees} />
-      <Stack.Screen name="BottomTabNavigator" component={BottomTabNavigator} />
-      <Stack.Screen name="Home" component={Home} />
-      <Stack.Screen name="Attendance" component={Attendance} />
-      <Stack.Screen name="Quiz" component={Quiz} />
-      <Stack.Screen name="CustomDrawer" component={CustomDrawer} />
-      <Stack.Screen name="SideDrawer" component={SideDrawer} />
-
-      
-
+      <Stack.Screen
+        name="BottomTabNavigator"
+        component={BottomTabNavigator}
+        options={{
+          title: "BottomTabNavigator",
+          // Custom header styling options if needed
+        }}
+      />
     </Stack.Navigator>
-  );
-};
-
-const App = () => {
-  return (
-    <NavigationContainer>
-      <Auth />
-    </NavigationContainer>
   );
 };
 

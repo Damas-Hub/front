@@ -2,21 +2,25 @@ import React, { useState, useEffect } from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { StyleSheet, View, Text } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import Home from  '../screens/Home';
+import Notification from '../screens/Notification'
+import Quiz from '../screens/Quiz';
+import TimeTable from '../screens/TimeTable';
+import Calendar from '../screens/Calendar';
 
 const Tab = createBottomTabNavigator();
 
 const home = "Home";
-const profile = "Profile";
+const quiz = "Quiz";
 const notification = "Notification";
 const timetable = "TimeTable";
-const settings = "Settings";
+const calendar = "Calendar";
 
 const BottomTabNavigator = () => {
   return (
     <Tab.Navigator
       initialRouteName={home}
       screenOptions={({ route }) => ({
-        headerShown: false,
         tabBarStyle: {
           display: "flex",
         },
@@ -29,7 +33,7 @@ const BottomTabNavigator = () => {
           let rn = route.name;
           if (rn === home) {
             IconName = focused ? "home" : "home-outline";
-          } else if (rn === profile) {
+          } else if (rn === calendar) {
             IconName = focused ? "calendar" : "calendar-outline";
           } else if (rn === notification) {
             IconName = focused ? "chatbubble" : "chatbubble-ellipses-outline";
@@ -43,61 +47,22 @@ const BottomTabNavigator = () => {
             );
           } else if (rn === timetable) {
             IconName = focused ? "chatbubble" : "chatbubble-ellipses-outline";
-          } else if (rn === settings) {
+          } else if (rn === quiz) {
             IconName = focused ? "chatbubble" : "chatbubble-ellipses-outline";
           }
           return <Ionicons name={IconName} size={size} color={color} />;
         },
       })}
     >
-      <Tab.Screen name={home} component={HomeScreen} />
-      <Tab.Screen name={profile} component={ProfileScreen} />
-      <Tab.Screen name={notification} component={NotificationScreen} />
-      <Tab.Screen name={timetable} component={TimeTableScreen} />
-      <Tab.Screen name={settings} component={SettingsScreen} />
+      <Tab.Screen name={home} component={Home} />
+      <Tab.Screen name={quiz} component={Quiz} />
+      <Tab.Screen name={notification} component={Notification} />
+      <Tab.Screen name={timetable} component={TimeTable} />
+      <Tab.Screen name={calendar} component={Calendar} />
     </Tab.Navigator>
   );
 };
 
-const HomeScreen = () => {
-  return (
-    <View>
-      <Text>Home Screen</Text>
-    </View>
-  );
-};
-
-const ProfileScreen = () => {
-  return (
-    <View>
-      <Text>Profile Screen</Text>
-    </View>
-  );
-};
-
-const NotificationScreen = () => {
-  return (
-    <View>
-      <Text>Notification Screen</Text>
-    </View>
-  );
-};
-
-const TimeTableScreen = () => {
-  return (
-    <View>
-      <Text>TimeTable Screen</Text>
-    </View>
-  );
-};
-
-const SettingsScreen = () => {
-  return (
-    <View>
-      <Text>Settings Screen</Text>
-    </View>
-  );
-};
 
 const styles = StyleSheet.create({
   notificationBadge: {
@@ -118,5 +83,3 @@ const styles = StyleSheet.create({
 });
 
 export default BottomTabNavigator;
-
-

@@ -8,25 +8,24 @@ import {
   Modal,
 } from "react-native";
 import { createDrawerNavigator } from "@react-navigation/drawer";
-import BottomTabNavigator from "./BottomTabNavigator";
-import Attendance from "../DrawerScreens/Attendance";
-import Calendar from "../DrawerScreens/Calendar";
-import Fees from "../DrawerScreens/Fees";
-import Quiz from "../DrawerScreens/Quiz";
-import Update from "../DrawerScreens/Update";
+ import BottomTabNavigator from "./BottomTabNavigator";
+ import Attendance from '../screens/Attendance';
+ import Profile from '../screens/Profile'
+import Fees from "../screens/Fees";
+import Settings from "../screens/Settings";
+import Update from "../screens/Update";
 import Logout from "../screens/Logout";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useNavigation } from "@react-navigation/native";
 
 const Drawer = createDrawerNavigator();
 
-
 const CustomDrawerContent = (props) => {
+
   const navigation = useNavigation();
   const [modalVisible, setModalVisible] = useState(false);
   const [username, setUsername] = useState("Loading");
   const [email, setEmail] = useState("Loading");
-
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "#fff" }}>
@@ -55,7 +54,7 @@ const CustomDrawerContent = (props) => {
               height: 65,
               width: 65,
             }}
-            source={require( "./icons/student.png")}
+            source={require("../assets/icons/home.png")}
           />
         </View>
       </View>
@@ -102,7 +101,7 @@ const CustomDrawerContent = (props) => {
             marginLeft: 10,
             alignItems: "center",
           }}
-          onPress={() => props.navigation.navigate("Calendar")}
+          onPress={() => props.navigation.navigate("Settings")}
         >
           <Image
             style={{
@@ -110,7 +109,7 @@ const CustomDrawerContent = (props) => {
               height: 30,
               marginLeft: 15,
             }}
-            source={require( "./icons/calendar.png")}
+            source={require("../assets/icons/settings.png")}
             resizeMode="contain"
           />
           <Text
@@ -121,7 +120,7 @@ const CustomDrawerContent = (props) => {
               fontWeight: "bold",
             }}
           >
-                Calendar
+            Settings
           </Text>
         </TouchableOpacity>
 
@@ -142,7 +141,7 @@ const CustomDrawerContent = (props) => {
               height: 30,
               marginLeft: 15,
             }}
-            source={require( "./icons/attendace.png")}
+            source={require("../assets/icons/attendace.png")}
             resizeMode="contain"
           />
           <Text
@@ -175,7 +174,7 @@ const CustomDrawerContent = (props) => {
               marginLeft: 15,
               tintColor: "#007bff",
             }}
-            source={require( "./icons/fees.png")}
+            source={require("../assets/icons/fees.png")}
             resizeMode="contain"
           />
           <Text
@@ -186,11 +185,10 @@ const CustomDrawerContent = (props) => {
               fontWeight: "bold",
             }}
           >
-           Fees
+            Fees
           </Text>
         </TouchableOpacity>
 
-        {/* Records Update Section */}
         <TouchableOpacity
           style={{
             marginTop: 10,
@@ -199,7 +197,7 @@ const CustomDrawerContent = (props) => {
             marginLeft: 10,
             alignItems: "center",
           }}
-          onPress={() => props.navigation.navigate("Quiz")}
+          onPress={() => props.navigation.navigate("Profile")}
         >
           <Image
             style={{
@@ -207,7 +205,7 @@ const CustomDrawerContent = (props) => {
               height: 30,
               marginLeft: 15,
             }}
-            source={require( "./icons/quiz.png")}
+            source={require("../assets/icons/quiz.png")}
             resizeMode="contain"
           />
           <Text
@@ -218,11 +216,10 @@ const CustomDrawerContent = (props) => {
               fontWeight: "bold",
             }}
           >
-            Quiz
+           Profile
           </Text>
         </TouchableOpacity>
 
-        {/* Settings Section */}
         <TouchableOpacity
           style={{
             marginTop: 10,
@@ -239,7 +236,7 @@ const CustomDrawerContent = (props) => {
               height: 30,
               marginLeft: 15,
             }}
-            source={require( "./icons/student.png")}
+            source={require("../assets/icons/update.png")}
             resizeMode="contain"
           />
           <Text
@@ -270,7 +267,7 @@ const CustomDrawerContent = (props) => {
       >
         <Image
           style={{ width: 35, height: 35, marginLeft: 20 }}
-          source={require( "./icons/logout.png")}
+          source={require("../assets/icons/logout.png")}
           resizeMode="contain"
         />
         <Text
@@ -348,12 +345,11 @@ const CustomDrawerContent = (props) => {
 const SideDrawer = () => {
   return (
     <Drawer.Navigator
-      drawerContent={(props) => CustomDrawerContent(props)}
-      initialRouteName="Home"
+      drawerContent = {(props) => CustomDrawerContent(props)}
+      initialRouteName="Menu"
     >
-
       <Drawer.Screen
-        name="Home"
+        name="Menu"
         component={BottomTabNavigator}
         options={{ headerShown: false }}
       />
@@ -363,12 +359,11 @@ const SideDrawer = () => {
         component={Attendance}
         options={{ headerShown: false }}
       />
-       <Drawer.Screen
-        name="Calendar"
-        component={Calendar}
+      <Drawer.Screen
+        name="Settings"
+        component={Settings}
         options={{ headerShown: false }}
       />
-
 
       <Drawer.Screen
         name="Fees"
@@ -383,8 +378,8 @@ const SideDrawer = () => {
       />
 
       <Drawer.Screen
-        name="Quiz"
-        component={Quiz}
+        name="Profile"
+        component={Profile}
         options={{ headerShown: false }}
       />
 
@@ -393,7 +388,6 @@ const SideDrawer = () => {
         component={Logout}
         options={{ headerShown: false }}
       />
-
     </Drawer.Navigator>
   );
 };

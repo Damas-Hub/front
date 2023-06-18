@@ -13,15 +13,15 @@ const StylishComponent = () => {
   return (
     <View style={styles.stylishContainer}>
       <Image
-        source={require('./images/profile.png')} // Replace with the path to your image
+        source={require( "../assets/images/profile.png")} // Replace with the path to your image
         style={styles.image}
       />
-     
+      {/* Add more components or content as needed */}
     </View>
   );
 };
 
-const Home = () => {
+const Profile = () => {
   return (
     <View style={styles.container}>
       <Header />
@@ -66,4 +66,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Home;
+export default Profile;
