@@ -82,7 +82,7 @@ const TimeTable = () => {
         ))}
          
       </ScrollView>
-      <SideDrawer/>
+       
     </View>
   );
 };

@@ -1,32 +1,51 @@
 import React from 'react';
-import { StyleSheet, View, Text, Image } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
+ 
 
-const Header = () => {
-  return (
-    <View style={styles.headerContainer}>
-      <Text style={styles.headerText}>Welcome to HTU INFOSAGE</Text>
-    </View>
-  );
-};
+const Home = ({ navigation }) => {
+  const handleAttendancePress = () => {
+    // Functionality for attendance
+    // Example: Navigate to the Attendance screen
+    navigation.navigate('Attendance');
+  };
 
-const StylishComponent = () => {
-  return (
-    <View style={styles.stylishContainer}>
-      <Image
-        source={require("../assets/images/profile.png")} // Replace with the path to your image
-        style={styles.image}
-      />
-      {/* Add more components or content as needed */}
-    </View>
-  );
-};
+  const handleGradesPress = () => {
+    // Functionality for grades
+    // Example: Navigate to the Grades screen
+    navigation.navigate('Grades');
+  };
 
-const Home = () => {
+  const handleSchedulePress = () => {
+    // Functionality for schedule
+    // Example: Navigate to the Schedule screen
+    navigation.navigate('Schedule');
+  };
+
+  const handleProfilePress = () => {
+    // Functionality for profile
+    // Example: Navigate to the Profile screen
+    navigation.navigate('Profile');
+  };
+
   return (
     <View style={styles.container}>
-      <Header />
-      <StylishComponent />
-      {/* Add more components or content as needed */}
+      <Text style={styles.header}>Student Information System</Text>
+
+      <TouchableOpacity style={styles.button} onPress={handleAttendancePress}>
+        <Text style={styles.buttonText}>Attendance</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity style={styles.button} onPress={handleGradesPress}>
+        <Text style={styles.buttonText}>Grades</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity style={styles.button} onPress={handleSchedulePress}>
+        <Text style={styles.buttonText}>Schedule</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity style={styles.button} onPress={handleProfilePress}>
+        <Text style={styles.buttonText}>Profile</Text>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -36,33 +55,25 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
+    justifyContent: 'center',
+    paddingHorizontal: 20,
   },
-  headerContainer: {
-    backgroundColor: '#f9f9f9',
-    width: '100%',
-    alignItems: 'center',
-    borderBottomLeftRadius: 20,
-    borderBottomRightRadius: 20,
-    paddingTop: 20,
-    paddingBottom: 10,
-  },
-  headerText: {
+  header: {
     fontSize: 24,
     fontWeight: 'bold',
+    marginBottom: 20,
   },
-  stylishContainer: {
-    marginTop: 20,
-    alignItems: 'center',
-  },
-  image: {
-    width: 200,
-    height: 200,
-    borderRadius: 100,
+  button: {
+    backgroundColor: '#007AFF',
+    padding: 10,
+    borderRadius: 5,
     marginBottom: 10,
   },
-  stylishText: {
-    fontSize: 18,
+  buttonText: {
+    color: '#fff',
+    fontSize: 16,
     fontWeight: 'bold',
+    textAlign: 'center',
   },
 });
 
