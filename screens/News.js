@@ -22,7 +22,7 @@ const StylishComponent = () => {
   );
 };
 
-const Settings = () => {
+const News = () => {
   return (
     <View style={styles.container}>
     
@@ -69,4 +69,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Settings;
+export default News;

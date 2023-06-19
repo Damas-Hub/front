@@ -1,79 +1,169 @@
 import React from 'react';
-import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
- 
+import { View, TouchableOpacity, Image, StyleSheet, Text, ScrollView, FlatList } from 'react-native';
+
+const quotes = [
+  'The best way to predict the future is to create it.',
+  'Success is not the key to happiness. Happiness is the key to success. If you love what you are doing, you will be successful.',
+  'Your work is going to fill a large part of your life, and the only way to be truly satisfied is to do what you believe is great work. And the only way to do great work is to love what you do.',
+  'The only way to do great work is to love what you do.',
+  'The future belongs to those who believe in the beauty of their dreams.',
+  'Don’t watch the clock; do what it does. Keep going.',
+  'If you think math is hard, try web design.',
+  'Code is like humor. When you have to explain it, it’s bad.',
+  'Simplicity is the soul of efficiency.',
+  'The function of good software is to make the complex appear to be simple.',
+  'The internet is the first thing that humanity has built that humanity doesn’t understand.',
+  'Any fool can write code that a computer can understand. Good programmers write code that humans can understand.',
+  'The best error message is the one that never shows up.',
+  'Software is a great combination of artistry and engineering.',
+  'It’s not a bug – it’s an undocumented feature.',
+  'A good programmer is someone who always looks both ways before crossing a one-way street.',
+  'The best thing about a boolean is even if you are wrong, you are only off by a bit.',
+  'Walking on water and developing software from a specification are easy if both are frozen.',
+  'The best method for accelerating a computer is the one that boosts it by 9.8 m/s².',
+  'In order to understand recursion, one must first understand recursion.',
+];
 
 const Home = ({ navigation }) => {
-  const handleAttendancePress = () => {
-    // Functionality for attendance
-    // Example: Navigate to the Attendance screen
-    navigation.navigate('Attendance');
-  };
-
-  const handleGradesPress = () => {
-    // Functionality for grades
-    // Example: Navigate to the Grades screen
-    navigation.navigate('Grades');
-  };
-
-  const handleSchedulePress = () => {
-    // Functionality for schedule
-    // Example: Navigate to the Schedule screen
-    navigation.navigate('Schedule');
-  };
-
-  const handleProfilePress = () => {
-    // Functionality for profile
-    // Example: Navigate to the Profile screen
+  const goToProfile = () => {
     navigation.navigate('Profile');
   };
 
-  return (
-    <View style={styles.container}>
-      <Text style={styles.header}>Student Information System</Text>
+  const goToUpdate = () => {
+    navigation.navigate('Update');
+  };
 
-      <TouchableOpacity style={styles.button} onPress={handleAttendancePress}>
-        <Text style={styles.buttonText}>Attendance</Text>
-      </TouchableOpacity>
+  const goToTimeTable = () => {
+    navigation.navigate('TimeTable');
+  };
 
-      <TouchableOpacity style={styles.button} onPress={handleGradesPress}>
-        <Text style={styles.buttonText}>Grades</Text>
-      </TouchableOpacity>
+  const goToQuiz = () => {
+    navigation.navigate('Quiz');
+  };
 
-      <TouchableOpacity style={styles.button} onPress={handleSchedulePress}>
-        <Text style={styles.buttonText}>Schedule</Text>
-      </TouchableOpacity>
+  const goToFees = () => {
+    navigation.navigate('Fees');
+  };
 
-      <TouchableOpacity style={styles.button} onPress={handleProfilePress}>
-        <Text style={styles.buttonText}>Profile</Text>
-      </TouchableOpacity>
+  const goToCalendar = () => {
+    navigation.navigate('Calendar');
+  };
+
+  const renderQuoteItem = ({ item }) => (
+    <View style={styles.quoteItem}>
+      <Text style={styles.quoteText}>{item}</Text>
     </View>
+  );
+
+  return (
+    <ScrollView contentContainerStyle={styles.container}>
+      <View style={styles.buttonContainer}>
+        <TouchableOpacity style={styles.button} onPress={goToProfile}>
+          <Image
+            source={require('../assets/images/profile.png')}
+            style={styles.buttonImage}
+          />
+          <Text style={styles.buttonText}>Profile</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.button} onPress={goToUpdate}>
+          <Image
+            source={require('../assets/icons/update.png')}
+            style={styles.buttonImage}
+          />
+          <Text style={styles.buttonText}>Update</Text>
+        </TouchableOpacity>
+      </View>
+      <View style={styles.buttonContainer}>
+        <TouchableOpacity style={styles.button} onPress={goToTimeTable}>
+          <Image
+            source={require('../assets/icons/timetable.png')}
+            style={styles.buttonImage}
+          />
+          <Text style={styles.buttonText}>TimeTable</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.button} onPress={goToQuiz}>
+          <Image
+            source={require('../assets/icons/quiz.png')}
+            style={styles.buttonImage}
+          />
+          <Text style={styles.buttonText}>Quiz</Text>
+        </TouchableOpacity>
+      </View>
+      <View style={styles.buttonContainer}>
+        <TouchableOpacity style={styles.button} onPress={goToFees}>
+          <Image
+            source={require('../assets/icons/fees.png')}
+            style={styles.buttonImage}
+          />
+          <Text style={styles.buttonText}>Fees</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.button} onPress={goToCalendar}>
+          <Image
+            source={require('../assets/icons/calendar.png')}
+            style={styles.buttonImage}
+          />
+          <Text style={styles.buttonText}>Calendar</Text>
+        </TouchableOpacity>
+      </View>
+      <ScrollView horizontal>
+        <FlatList
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          data={quotes}
+          keyExtractor={(item, index) => index.toString()}
+          renderItem={renderQuoteItem}
+        />
+      </ScrollView>
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
+    flexGrow: 1,
     justifyContent: 'center',
-    paddingHorizontal: 20,
+    alignItems: 'center',
   },
-  header: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginBottom: 20,
+  buttonContainer: {
+    flexDirection: 'row',
+    marginBottom: 40,
   },
   button: {
-    backgroundColor: '#007AFF',
-    padding: 10,
-    borderRadius: 5,
-    marginBottom: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 10,
+    height: 130,
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+    shadowColor: 'black',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.5,
+    shadowRadius: 4,
+    elevation: 4,
+    marginLeft: 20,
+  },
+  buttonImage: {
+    width: 100,
+    height: 100,
   },
   buttonText: {
-    color: '#fff',
-    fontSize: 16,
-    fontWeight: 'bold',
+    marginTop: 10,
     textAlign: 'center',
+    fontWeight: 'bold',
+  },
+  quoteItem: {
+    width: 300,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'lightgray',
+    borderRadius: 10,
+    marginHorizontal: 10,
+  },
+  quoteText: {
+    textAlign: 'center',
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginHorizontal: 20,
   },
 });
 

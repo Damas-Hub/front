@@ -2,25 +2,26 @@ import React, { useState, useEffect } from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { StyleSheet, View, Text } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import Home from  '../screens/Home';
-import Notification from '../screens/Notification'
-import Quiz from '../screens/Quiz';
-import TimeTable from '../screens/TimeTable';
-import Calendar from '../screens/Calendar';
+import Home from '../screens/Home';
+import Notification from '../screens/Notification';
+import News from '../screens/News';
+import Settings from '../screens/Settings';
+import Attendance from '../screens/Attendance';
 
 const Tab = createBottomTabNavigator();
 
 const home = "Home";
-const quiz = "Quiz";
+const news = "News";
 const notification = "Notification";
-const timetable = "TimeTable";
-const calendar = "Calendar";
+const attendance = "Attendance";
+const settings = "Settings";
 
 const BottomTabNavigator = () => {
   return (
     <Tab.Navigator
       initialRouteName={home}
       screenOptions={({ route }) => ({
+        headerShown: false,
         tabBarStyle: {
           display: "flex",
         },
@@ -33,10 +34,10 @@ const BottomTabNavigator = () => {
           let rn = route.name;
           if (rn === home) {
             IconName = focused ? "home" : "home-outline";
-          } else if (rn === calendar) {
-            IconName = focused ? "calendar" : "calendar-outline";
+          } else if (rn === news) {
+            IconName = focused ? "newspaper" : "newspaper-outline";
           } else if (rn === notification) {
-            IconName = focused ? "chatbubble" : "chatbubble-ellipses-outline";
+            IconName = focused ? "notifications" : "notifications-outline";
             return (
               <View>
                 <Ionicons name={IconName} size={size} color={color} />
@@ -45,24 +46,23 @@ const BottomTabNavigator = () => {
                 </View>
               </View>
             );
-          } else if (rn === timetable) {
-            IconName = focused ? "chatbubble" : "chatbubble-ellipses-outline";
-          } else if (rn === quiz) {
-            IconName = focused ? "chatbubble" : "chatbubble-ellipses-outline";
+          } else if (rn === attendance) {
+            IconName = focused ? "calendar" : "calendar-outline";
+          } else if (rn === settings) {
+            IconName = focused ? "settings" : "settings-outline";
           }
           return <Ionicons name={IconName} size={size} color={color} />;
         },
       })}
     >
       <Tab.Screen name={home} component={Home} />
-      <Tab.Screen name={quiz} component={Quiz} />
+      <Tab.Screen name={news} component={News} />
       <Tab.Screen name={notification} component={Notification} />
-      <Tab.Screen name={timetable} component={TimeTable} />
-      <Tab.Screen name={calendar} component={Calendar} />
+      <Tab.Screen name={attendance} component={Attendance} />
+      <Tab.Screen name={settings} component={Settings} />
     </Tab.Navigator>
   );
 };
-
 
 const styles = StyleSheet.create({
   notificationBadge: {

@@ -9,71 +9,66 @@ const CustomDrawer = ({ title, isHome }) => {
     navigation.goBack();
   };
 
-  // Opening a navigation drawer
   const openDrawer = () => {
     navigation.openDrawer();
   };
 
   return (
-    <View
-      style={{
-        flexDirection: "row",
-        height: 50,
-        backgroundColor: "#E7EAEA",
-      }}
-    >
-      {isHome ? (
-        <TouchableOpacity
-          onPress={openDrawer}
-          style={{
-            flex: 1,
-            justifyContent: "center",
-          }}
-        >
+    <View style={styles.container}>
+      <TouchableOpacity onPress={openDrawer} style={styles.menuButton}>
+        <Image
+          style={styles.icon}
+          source={require("../assets/icons/menu.png")}
+          resizeMode="contain"
+        />
+      </TouchableOpacity>
+
+      {!isHome && (
+        <TouchableOpacity onPress={goBack} style={styles.backButton}>
           <Image
-            style={{
-              width: 30,
-              height: 30,
-              marginLeft: 10,
-            }}
-            source={require("../assets/icons/menu.png")}
-            resizeMode="contain"
-          />
-        </TouchableOpacity>
-      ) : (
-        <TouchableOpacity
-          onPress={goBack}
-          style={{
-            flexDirection: "row",
-            alignItems: "center",
-          }}
-        >
-          <Image
-            style={{
-              width: 25,
-              height: 25,
-              marginLeft: 10,
-            }}
+            style={styles.icon}
             source={require("../assets/icons/left.png")}
             resizeMode="contain"
           />
-          <Text style={styles.Back}>Back</Text>
+          <Text style={styles.backText}>Back</Text>
         </TouchableOpacity>
       )}
-      <View
-        style={{
-          flex: 25,
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      ></View>
+
+      <View style={styles.titleContainer}>
+        <Text style={styles.title}>{title}</Text>
+      </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  Back: {
+  container: {
+    flexDirection: "row",
+    height: 50,
+    backgroundColor: "#E7EAEA",
+    alignItems: "center",
+  },
+  menuButton: {
+    marginLeft: 10,
+  },
+  backButton: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginLeft: 10,
+  },
+  icon: {
+    width: 25,
+    height: 25,
+  },
+  backText: {
     marginLeft: 5,
+  },
+  titleContainer: {
+    flex: 1,
+    alignItems: "center",
+  },
+  title: {
+    // Add your title styles here
   },
 });
 

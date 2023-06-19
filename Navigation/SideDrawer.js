@@ -8,9 +8,9 @@ import {
   Modal,
 } from "react-native";
 import { createDrawerNavigator } from "@react-navigation/drawer";
- import BottomTabNavigator from "./BottomTabNavigator";
- import Attendance from '../screens/Attendance';
- import Profile from '../screens/Profile'
+import BottomTabNavigator from "./BottomTabNavigator";
+import Attendance from "../screens/Attendance";
+import Profile from "../screens/Profile";
 import Fees from "../screens/Fees";
 import Settings from "../screens/Settings";
 import Update from "../screens/Update";
@@ -21,21 +21,28 @@ import { useNavigation } from "@react-navigation/native";
 const Drawer = createDrawerNavigator();
 
 const CustomDrawerContent = (props) => {
-
   const navigation = useNavigation();
   const [modalVisible, setModalVisible] = useState(false);
   const [username, setUsername] = useState("Loading");
   const [email, setEmail] = useState("Loading");
 
+  const signOut = () => {
+    // Implement your sign out logic here
+    // For now, just close the modal
+    setModalVisible(false);
+  };
+
+  useEffect(() => {
+    // Update the state variables accordingly
+    setUsername("John Doe");
+    setEmail("johndoe@example.com");
+  }, []);
+
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "#fff" }}>
       {/* Image Profile View */}
       <View
-        style={{
-          height: 160,
-          alignItems: "center",
-          justifyContent: "center",
-        }}
+        style={{ height: 160, alignItems: "center", justifyContent: "center" }}
       >
         {/* Image container and User name Appearance */}
         <View
@@ -49,22 +56,14 @@ const CustomDrawerContent = (props) => {
           }}
         >
           <Image
-            style={{
-              marginBottom: 5,
-              height: 65,
-              width: 65,
-            }}
+            style={{ marginBottom: 5, height: 65, width: 65 }}
             source={require("../assets/icons/home.png")}
           />
         </View>
       </View>
 
-      <ScrollView
-        style={{
-          marginLeft: 5,
-        }}
-      >
-        {/* Users details callback */}
+      <ScrollView style={{ marginLeft: 5 }}>
+        {/* User details */}
         <View>
           <Text
             style={{
@@ -101,14 +100,10 @@ const CustomDrawerContent = (props) => {
             marginLeft: 10,
             alignItems: "center",
           }}
-          onPress={() => props.navigation.navigate("Settings")}
+          onPress={() => navigation.navigate("Menu")}
         >
           <Image
-            style={{
-              width: 30,
-              height: 30,
-              marginLeft: 15,
-            }}
+            style={{ width: 30, height: 30, marginLeft: 15 }}
             source={require("../assets/icons/settings.png")}
             resizeMode="contain"
           />
@@ -133,15 +128,11 @@ const CustomDrawerContent = (props) => {
             marginLeft: 10,
             alignItems: "center",
           }}
-          onPress={() => props.navigation.navigate("Attendance")}
+          onPress={() => navigation.navigate("Attendance")}
         >
           <Image
-            style={{
-              width: 30,
-              height: 30,
-              marginLeft: 15,
-            }}
-            source={require("../assets/icons/attendace.png")}
+            style={{ width: 30, height: 30, marginLeft: 15 }}
+            source={require("../assets/icons/attendance.png")}
             resizeMode="contain"
           />
           <Text
@@ -165,7 +156,7 @@ const CustomDrawerContent = (props) => {
             marginLeft: 10,
             alignItems: "center",
           }}
-          onPress={() => props.navigation.navigate("Fees")}
+          onPress={() => navigation.navigate("Fees")}
         >
           <Image
             style={{
@@ -197,14 +188,10 @@ const CustomDrawerContent = (props) => {
             marginLeft: 10,
             alignItems: "center",
           }}
-          onPress={() => props.navigation.navigate("Profile")}
+          onPress={() => navigation.navigate("Profile")}
         >
           <Image
-            style={{
-              width: 30,
-              height: 30,
-              marginLeft: 15,
-            }}
+            style={{ width: 30, height: 30, marginLeft: 15 }}
             source={require("../assets/icons/quiz.png")}
             resizeMode="contain"
           />
@@ -216,7 +203,7 @@ const CustomDrawerContent = (props) => {
               fontWeight: "bold",
             }}
           >
-           Profile
+            Profile
           </Text>
         </TouchableOpacity>
 
@@ -228,14 +215,10 @@ const CustomDrawerContent = (props) => {
             marginLeft: 10,
             alignItems: "center",
           }}
-          onPress={() => props.navigation.navigate("Update")}
+          onPress={() => navigation.navigate("Update")}
         >
           <Image
-            style={{
-              width: 30,
-              height: 30,
-              marginLeft: 15,
-            }}
+            style={{ width: 30, height: 30, marginLeft: 15 }}
             source={require("../assets/icons/update.png")}
             resizeMode="contain"
           />
@@ -260,10 +243,7 @@ const CustomDrawerContent = (props) => {
           marginLeft: 10,
           alignItems: "center",
         }}
-        onPress={() => {
-          props.navigation.closeDrawer();
-          setModalVisible(true);
-        }}
+        onPress={() => setModalVisible(true)}
       >
         <Image
           style={{ width: 35, height: 35, marginLeft: 20 }}
@@ -281,6 +261,8 @@ const CustomDrawerContent = (props) => {
           Logout
         </Text>
       </TouchableOpacity>
+
+      {/* Logout Modal */}
       <Modal visible={modalVisible} animationType="fade" transparent>
         <View
           style={{
@@ -327,10 +309,7 @@ const CustomDrawerContent = (props) => {
                   borderRadius: 5,
                   width: "25%",
                 }}
-                onPress={() => {
-                  setModalVisible(false);
-                  Signout(props);
-                }}
+                onPress={signOut}
               >
                 <Text style={{ color: "#fff", textAlign: "center" }}>Yes</Text>
               </TouchableOpacity>
@@ -345,7 +324,7 @@ const CustomDrawerContent = (props) => {
 const SideDrawer = () => {
   return (
     <Drawer.Navigator
-      drawerContent = {(props) => CustomDrawerContent(props)}
+      drawerContent={(props) => <CustomDrawerContent {...props} />}
       initialRouteName="Menu"
     >
       <Drawer.Screen
@@ -353,7 +332,6 @@ const SideDrawer = () => {
         component={BottomTabNavigator}
         options={{ headerShown: false }}
       />
-
       <Drawer.Screen
         name="Attendance"
         component={Attendance}
@@ -364,25 +342,21 @@ const SideDrawer = () => {
         component={Settings}
         options={{ headerShown: false }}
       />
-
       <Drawer.Screen
         name="Fees"
         component={Fees}
         options={{ headerShown: false }}
       />
-
       <Drawer.Screen
         name="Update"
         component={Update}
         options={{ headerShown: false }}
       />
-
       <Drawer.Screen
         name="Profile"
         component={Profile}
         options={{ headerShown: false }}
       />
-
       <Drawer.Screen
         name="Logout"
         component={Logout}
