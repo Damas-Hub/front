@@ -137,14 +137,15 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     shadowColor: 'black',
     shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.5,
-    shadowRadius: 4,
-    elevation: 4,
+    shadowOpacity: 0.3,
+    shadowRadius: 8,
+    elevation: 10,
     marginLeft: 20,
   },
   buttonImage: {
-    width: 100,
-    height: 100,
+    width: 130,
+    height: 120,
+    marginTop:80,
   },
   buttonText: {
     marginTop: 10,
@@ -158,6 +159,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'lightgray',
     borderRadius: 10,
     marginHorizontal: 10,
+    marginTop:50,
   },
   quoteText: {
     textAlign: 'center',

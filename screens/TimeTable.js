@@ -1,7 +1,24 @@
 import React, { useEffect, useRef } from 'react';
-import { View, ScrollView, Text, StyleSheet, StatusBar, Animated } from 'react-native';
- 
+import { View, ScrollView, Text, StyleSheet, StatusBar, Animated, TouchableOpacity } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
 
+const Header = () => {
+  const navigation = useNavigation();
+
+  const goBack = () => {
+    navigation.navigate('Home'); // Replace 'Home' with the appropriate screen name for your home screen
+  };
+
+  return (
+    <View style={styles.header}>
+      <TouchableOpacity onPress={goBack}>
+        <Ionicons name="arrow-back" size={24} color="black" />
+      </TouchableOpacity>
+      <Text style={styles.headerText}>Time Table for Computer Science L300- Second Semester</Text>
+    </View>
+  );
+};
 const TimeTable = () => {
   const timetableData = [
     { day: 'Monday', venue: 'Main Octagon', lecturer: 'Dr. Appiah Ben', time: '09:00 AM - 11:00 AM', color: '#337EFF', courseName: 'Computer Security' },
@@ -36,12 +53,9 @@ const TimeTable = () => {
   }, [fadeAnim, scaleAnim, slideAnim]);
 
   return (
-    
     <View style={styles.container}>
       <StatusBar backgroundColor="#ffffff" barStyle="dark-content" />
-      <View style={styles.titleContainer}>
-        <Text style={styles.title}>{"\n"}<Text style={styles.titleText}>Time Table for Computer Science L300- Second Semester</Text></Text>
-      </View>
+      <Header />
       <ScrollView>
         {timetableData.map((item, index) => (
           <Animated.View
@@ -78,11 +92,8 @@ const TimeTable = () => {
               <Text style={styles.text}>{item.courseName}</Text>
             </View>
           </Animated.View>
-          
         ))}
-         
       </ScrollView>
-       
     </View>
   );
 };
@@ -91,20 +102,23 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 10,
-    
   },
-  titleContainer: {
+  header: {
+    flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 20,
+    justifyContent: 'space-between',
+    paddingTop: 40,
+    paddingBottom: 20,
+    borderBottomLeftRadius: 10,
+    borderBottomRightRadius: 10,
+    backgroundColor: 'lightblue',
+    paddingHorizontal: 16,
   },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    textAlign: 'center',
-  },
-  titleText: {
+  headerText: {
     fontSize: 24,
     fontWeight: 'bold',
+    textAlign: 'center',
+    color: 'white',
   },
   itemContainer: {
     padding: 10,

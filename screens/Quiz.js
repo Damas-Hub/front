@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, Button } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, Button, ScrollView } from 'react-native';
+import { AntDesign } from '@expo/vector-icons';
+ 
 
-const Quiz = () => {
-    const questions = [
+const Quiz = ({ navigation }) => {
+  const questions = [
     
         {
           question: 'What is the purpose of a password manager?',
@@ -136,154 +138,185 @@ const Quiz = () => {
           },
         ];
       
-      
-
-  const [currentQuestion, setCurrentQuestion] = useState(0);
-  const [answers, setAnswers] = useState([]);
-  const [showResult, setShowResult] = useState(false);
-  const [score, setScore] = useState(0);
-
-  const handleAnswer = (selectedOption) => {
-    const updatedAnswers = [...answers];
-    updatedAnswers[currentQuestion] = selectedOption;
-    setAnswers(updatedAnswers);
-  };
-
-  const goToNextQuestion = () => {
-    if (currentQuestion === questions.length - 1) {
-      setShowResult(true);
-    } else {
-      setCurrentQuestion(currentQuestion + 1);
-    }
-  };
-
-  const goToPreviousQuestion = () => {
-    setCurrentQuestion(currentQuestion - 1);
-  };
-
-  const submitAnswers = () => {
-    let score = 0;
-    answers.forEach((answer, index) => {
-      if (answer === questions[index].correctAnswer) {
+        const [currentQuestion, setCurrentQuestion] = useState(0);
+        const [answers, setAnswers] = useState([]);
+        const [showResult, setShowResult] = useState(false);
+        const [score, setScore] = useState(0);
+        
+        const handleAnswer = (selectedOption) => {
+        const updatedAnswers = [...answers];
+        updatedAnswers[currentQuestion] = selectedOption;
+        setAnswers(updatedAnswers);
+        };
+        
+        const goToNextQuestion = () => {
+        if (currentQuestion === questions.length - 1) {
+        setShowResult(true);
+        } else {
+        setCurrentQuestion(currentQuestion + 1);
+        }
+        };
+        
+        const goToPreviousQuestion = () => {
+        setCurrentQuestion(currentQuestion - 1);
+        };
+        
+        const submitAnswers = () => {
+        let score = 0;
+        answers.forEach((answer, index) => {
+        if (answer === questions[index].correctAnswer) {
         score++;
-      }
-    });
-    setScore(score);
-    setShowResult(true);
-  };
-
-  const restartQuiz = () => {
-    setCurrentQuestion(0);
-    setAnswers([]);
-    setShowResult(false);
-    setScore(0);
-  };
-
-  if (showResult) {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.title}>Computer Security Midsem</Text>
+        }
+        });
+        setScore(score);
+        setShowResult(true);
+        };
+        
+        const restartQuiz = () => {
+        setCurrentQuestion(0);
+        setAnswers([]);
+        setShowResult(false);
+        setScore(0);
+        };
+        
+        if (showResult) {
+        return (
+        <View style={styles.container}>
+        <View style={styles.header}>
+        <TouchableOpacity onPress={() => navigation.navigate('Home')}>
+        <AntDesign name="arrowleft" size={24} color="white" />
+        </TouchableOpacity>
+        <Text style={styles.title}>Quiz</Text>  
+        <View style={{ flex: 1 }} />  
+      </View>
+        
+        <ScrollView contentContainerStyle={styles.contentContainer}>
         <Text style={styles.resultText}>Quiz Completed!</Text>
         <Text style={styles.resultText}>Your Score: {score}/{questions.length}</Text>
         <Button title="Restart Quiz" onPress={restartQuiz} />
-      </View>
-    );
-  }
-
-  const currentQuestionData = questions[currentQuestion];
-
-  return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Computer Security Midsem</Text>
-      <Text style={styles.questionText}>
+        </ScrollView>
+        </View>
+        );
+        }
+        
+        const currentQuestionData = questions[currentQuestion];
+        
+        return (
+        <View style={styles.container}>
+        <View style={styles.header}>
+        <TouchableOpacity onPress={() => navigation.navigate('Home')}>
+        <AntDesign name="arrowleft" size={24} color="black" />
+        </TouchableOpacity>
+        <Text style={styles.title}>Quiz</Text>
+        </View>
+        <ScrollView contentContainerStyle={styles.contentContainer}>
+        <View style={styles.questionContainer}>
+        <Text style={styles.questionText}>
         {currentQuestion + 1}. {currentQuestionData.question}
-      </Text>
-      <View style={styles.optionsContainer}>
+        </Text>
+        </View>
+        <View style={styles.optionsContainer}>
         {currentQuestionData.options.map((option) => (
-          <TouchableOpacity
-            key={option.label}
-            style={[
-              styles.optionButton,
-              answers[currentQuestion] === option.label && styles.selectedOption,
-            ]}
-            onPress={() => handleAnswer(option.label)}
-          >
-            <Text style={styles.optionLabelText}>{option.text}</Text>
-          </TouchableOpacity>
+        <TouchableOpacity
+        key={option.label}
+        style={[
+        styles.optionButton,
+        answers[currentQuestion] === option.label && styles.selectedOption,
+        ]}
+        onPress={() => handleAnswer(option.label)}
+        >
+        <Text style={styles.optionLabelText}>{option.text}</Text>
+        </TouchableOpacity>
         ))}
-      </View>
-      <View style={styles.buttonContainer}>
+        </View>
+        <View style={styles.buttonContainer}>
         {currentQuestion > 0 && (
-          <Button title="Previous" onPress={goToPreviousQuestion} />
+        <Button title="Previous" onPress={goToPreviousQuestion} />
         )}
         {currentQuestion < questions.length - 1 && (
-          <Button title="Next" onPress={goToNextQuestion} />
+        <Button title="Next" onPress={goToNextQuestion} />
         )}
         {currentQuestion === questions.length - 1 && (
-          <Button title="Submit" onPress={submitAnswers} />
+        <Button title="Submit" onPress={submitAnswers} />
         )}
-      </View>
-      <View style={styles.previewContainer}>
+        </View>
+        <View style={styles.previewContainer}>
         <Text style={styles.previewText}>Selected answers:</Text>
         {answers.map((answer, index) => (
-          <Text key={index} style={styles.previewText}>
-            Question {index + 1}: {answer || '-'}
-          </Text>
+        <Text key={index} style={styles.previewText}>
+        Question {index + 1}: {answer || '-'}
+        </Text>
         ))}
-      </View>
-    </View>
-  );
-};
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingHorizontal: 20,
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    marginBottom: 20,
-  },
-  questionText: {
-    fontSize: 18,
-    marginBottom: 20,
-  },
-  optionsContainer: {
-    width: '100%',
-    marginBottom: 20,
-  },
-  optionButton: {
-    borderWidth: 1,
-    borderColor: '#ccc',
-    borderRadius: 8,
-    padding: 10,
-    marginBottom: 10,
-  },
-  selectedOption: {
-    backgroundColor: '#ccc',
-  },
-  optionLabelText: {
-    fontSize: 16,
-  },
-  buttonContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginBottom: 20,
-     
-  },
-  previewContainer: {
-    alignItems: 'flex-start',
-  },
-  previewText: {
-    fontSize: 16,
-  },
-  resultText: {
-    fontSize: 18,
-    marginBottom: 10,
-  },
-});
-
-export default Quiz;
+        </View>
+        </ScrollView>
+        </View>
+        );
+        };
+        
+        const styles = StyleSheet.create({
+          container: {
+            flex: 1,
+          },
+          header: {
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            paddingTop: 40,
+            paddingBottom: 20,
+            borderBottomLeftRadius: 10,
+            borderBottomRightRadius: 10,
+            backgroundColor: 'lightblue',
+            paddingHorizontal: 16,
+          },
+          title: {
+            fontSize: 20,
+            fontWeight: 'bold',
+            color: 'black',
+            textAlign: 'center', // Added
+            flex: 1, // Added
+          },
+        contentContainer: {
+        paddingHorizontal: 20,
+        paddingBottom: 20,
+        },
+        questionContainer: {
+        marginBottom: 20,
+        },
+        questionText: {
+        fontSize: 18,
+        },
+        optionsContainer: {
+        width: '100%',
+        marginBottom: 20,
+        },
+        optionButton: {
+        borderWidth: 1,
+        borderColor: '#ccc',
+        borderRadius: 8,
+        padding: 10,
+        marginBottom: 10,
+        },
+        selectedOption: {
+        backgroundColor: '#ccc',
+        },
+        optionLabelText: {
+        fontSize: 16,
+        },
+        buttonContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        marginBottom: 20,
+        },
+        previewContainer: {
+        alignItems: 'flex-start',
+        },
+        previewText: {
+        fontSize: 16,
+        },
+        resultText: {
+        fontSize: 18,
+        marginBottom: 10,
+        },
+        });
+        
+        export default Quiz;

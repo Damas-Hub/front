@@ -1,8 +1,12 @@
 import React from "react";
-import { View, Text, StyleSheet, ScrollView } from "react-native";
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
 
-const Calendar = () => {
+
+const Calendar = ({ navigation }) => {
   const academicCalendar = [
+
+    
     {
       number: "1.",
       activity: "Reporting Date",
@@ -119,8 +123,19 @@ const Calendar = () => {
     },
   ];
 
+  const handleGoBack = () => {
+    navigation.navigate("Home"); // Replace "Homepage" with the actual screen name for your homepage
+  };
+
   return (
+    
     <ScrollView contentContainerStyle={styles.container}>
+     <View style={[styles.header, styles.headerWithBorderRadius]}>
+        <TouchableOpacity onPress={handleGoBack}>
+          <Ionicons name="arrow-back" size={24} color="#333" style={styles.goBackIcon} />
+        </TouchableOpacity>
+        <Text style={styles.headerTitle}>Calendar</Text>
+      </View>
       <Text style={styles.title}>ACADEMIC CALENDAR</Text>
       <Text style={styles.subtitle}>
         FOR FIRST SEMESTER 2022/2023 ACADEMIC YEAR
@@ -215,21 +230,44 @@ const styles = StyleSheet.create({
     padding: 16,
   },
   header: {
-    height: 20, // Set the desired height of the header
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingTop: 40,
+    paddingBottom: 20,
+    borderBottomLeftRadius: 10,
+    borderBottomRightRadius: 10,
+    backgroundColor: 'lightblue',
+    paddingHorizontal: 16,
+  
+     
 
-    borderBottomLeftRadius: 10, // Set the bottom left border radius
-    borderBottomRightRadius: 10, // Set the bottom right border radius
-    marginBottom: 16, // Adjust margin as needed
+    
   },
-  title: {
+  headerWithBorderRadius: {
+    borderBottomLeftRadius: 20,
+    borderBottomRightRadius: 20,
+  },
+  goBackIcon: {
+    marginLeft: 16,
+  },
+  headerTitle: {
     fontSize: 24,
     fontWeight: "bold",
-    textAlign: "center",
-    marginBottom: 16,
+    marginLeft: 16,
+    alignItems: 'center',
+     
+    
+  },
+  title: {
+    fontSize: 20,
+    fontWeight: "bold",
+    marginBottom: 8,
+    textAlign: 'center',
+   
   },
   subtitle: {
     fontSize: 16,
-    textAlign: "center",
     marginBottom: 16,
   },
   sectionTitle: {
@@ -253,7 +291,6 @@ const styles = StyleSheet.create({
     flex: 1,
     fontWeight: "bold",
     padding: 8,
-     
   },
   tableNumber: {
     flex: 1,
@@ -295,5 +332,4 @@ const styles = StyleSheet.create({
     marginTop: 8,
   },
 });
-
 export default Calendar;

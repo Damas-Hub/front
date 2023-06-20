@@ -13,7 +13,7 @@ const Splash = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <Image
-        source={require('./assets/images/splash.JPG')}
+        source={require('./assets/images/login.jpeg')}
         style={styles.logo}
         resizeMode="contain"
       />

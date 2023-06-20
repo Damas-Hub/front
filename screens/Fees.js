@@ -1,7 +1,8 @@
 import React from 'react';
-import { ScrollView, StyleSheet, Text } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 
-const Fees = () => {
+const Fees = ({ navigation }) => {
   const bachelorPrograms = {
     facultyOfEngineering: {
       freshStudents: '3,294.00',
@@ -65,6 +66,13 @@ const Fees = () => {
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
+      <View style={styles.header}>
+        <TouchableOpacity onPress={() => navigation.goBack()}>
+          <Ionicons name="arrow-back" size={24} color="black" />
+        </TouchableOpacity>
+        <Text style={styles.title}>Fees</Text>
+      </View>
+
       <Text style={styles.title}>APPROVED FEES FOR 2022/2023 ACADEMIC YEAR – REGULAR</Text>
 
       <Text style={styles.heading}>Bachelor Programs:</Text>
@@ -149,22 +157,38 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     padding: 20,
   },
+  header: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingTop: 40,
+    paddingBottom: 20,
+    borderBottomLeftRadius: 10,
+    borderBottomRightRadius: 10,
+    backgroundColor: 'lightblue',
+    paddingHorizontal: 16,
+  
+  },
+  backButton: {
+    marginLeft: 10,
+    marginTop:20,
+    paddingBottom: 16,
+    
+  },
   title: {
+    flex: 1,
     textAlign: 'center',
-    fontSize: 18,
+    fontSize: 20,
     fontWeight: 'bold',
-    marginBottom: 20,
   },
   heading: {
     fontSize: 16,
     fontWeight: 'bold',
-    marginTop: 10,
     marginBottom: 10,
   },
   programName: {
-    fontSize: 14,
     fontWeight: 'bold',
-    marginTop: 10,
+    marginBottom: 5,
   },
   note: {
     marginTop: 10,
