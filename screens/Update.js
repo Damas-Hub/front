@@ -10,6 +10,7 @@ const Update = () => {
   const [phoneNumber, setPhoneNumber] = useState('');
   const [dateOfBirth, setDateOfBirth] = useState('');
   const [password, setPassword] = useState('');
+  const [profileImage, setProfileImage] = useState(null);
 
   const handleUpdate = () => {
     // Perform update logic here
@@ -18,6 +19,20 @@ const Update = () => {
     console.log('Phone Number:', phoneNumber);
     console.log('Date of Birth:', dateOfBirth);
     console.log('Password:', password);
+    console.log('Profile Image:', profileImage);
+  };
+
+  const handleProfileImageUpload = (event) => {
+    const file = event.target.files[0];
+    const reader = new FileReader();
+
+    reader.onload = (upload) => {
+      setProfileImage(upload.target.result);
+    };
+
+    if (file) {
+      reader.readAsDataURL(file);
+    }
   };
 
   return (
@@ -31,6 +46,14 @@ const Update = () => {
       </View>
       <ScrollView contentContainerStyle={styles.container}>
         <Text style={styles.welcomeText}>Update Your Details Here</Text>
+        <View style={styles.profileImageContainer}>
+          {profileImage ? (
+            <Image source={{ uri: profileImage }} style={styles.profileImage} />
+          ) : (
+            <Text style={styles.profileImagePlaceholder}>Select Profile Image</Text>
+          )}
+          <input type="file" accept="image/*" onChange={handleProfileImageUpload} />
+        </View>
         <TextInput
           style={styles.input}
           placeholder="Email"
@@ -71,14 +94,12 @@ const styles = StyleSheet.create({
   header: {
     flexDirection: 'row',
     alignItems: 'center',
-    // justifyContent: 'space-between',
     paddingTop: 40,
     paddingBottom: 20,
     borderBottomLeftRadius: 10,
     borderBottomRightRadius: 10,
     backgroundColor: 'lightblue',
     paddingHorizontal: 16,
-  
   },
   headerTitle: {
     fontSize: 20,
@@ -129,6 +150,27 @@ const styles = StyleSheet.create({
   },
   space: {
     height: 16,
+  },
+  profileImageContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: 120,
+    width: 120,
+    borderRadius: 60,
+    borderWidth: 1,
+    borderColor: 'gray',
+    alignSelf: 'center',
+    marginBottom: 24,
+  },
+  profileImage: {
+    height: 120,
+    width: 120,
+    borderRadius: 60,
+  },
+  profileImagePlaceholder: {
+    textAlign: 'center',
+    fontSize: 16,
+    color: '#888',
   },
 });
 

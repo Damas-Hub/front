@@ -1,35 +1,59 @@
-import React from 'react';
-import { StyleSheet, View, Text, Image } from 'react-native';
- 
-
-const Header = () => {
-  return (
-    <View style={styles.headerContainer}>
-      <Text style={styles.headerText}>Welcome to HTU INFOSAGE</Text>
-    </View>
-  );
-};
-
-const StylishComponent = () => {
-  return (
-    <View style={styles.stylishContainer}>
-      <Image
-        source={require("../assets/icons/settings.png")} // Replace with the path to your image
-        style={styles.image}
-      />
-      {/* Add more components or content as needed */}
-    </View>
-  );
-};
+ // Settings.js
+import React, { useState } from 'react';
+import { View, Text, TouchableOpacity, StyleSheet, Modal } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
 
 const Settings = () => {
+  const navigation = useNavigation();
+  const [showConfirmation, setShowConfirmation] = useState(false);
+
+  const handleGoBack = () => {
+    navigation.navigate('Home');
+  };
+
+  const handleLogout = () => {
+    setShowConfirmation(true);
+  };
+
+  const handleLogoutConfirm = () => {
+    setShowConfirmation(false);
+    navigation.navigate('Login');
+  };
+
+  const handleLogoutCancel = () => {
+    setShowConfirmation(false);
+  };
+
   return (
     <View style={styles.container}>
-    
-
-      <Header />
-      <StylishComponent />
-      {/* Add more components or content as needed */}
+      <View style={styles.headerContainer}>
+        <TouchableOpacity onPress={handleGoBack}>
+          <Ionicons name="md-arrow-back" size={24} color="black" />
+        </TouchableOpacity>
+        <Text style={styles.headerText}>Settings</Text>
+        <TouchableOpacity onPress={handleLogout}>
+          <Ionicons name="log-out" size={30} color="red" />
+        </TouchableOpacity>
+      </View>
+      <View style={styles.contentContainer}>
+        {/* Add your settings content here */}
+      </View>
+      <Modal visible={showConfirmation} animationType="fade" transparent>
+        <View style={styles.modalContainer}>
+          <View style={styles.modalContent}>
+            <Text style={styles.confirmationText}>Are you sure you want to log out?</Text>
+            <View style={styles.buttonContainer}>
+              <TouchableOpacity style={[styles.button, styles.yesButton]} onPress={handleLogoutConfirm}>
+                <Text style={styles.buttonText}>Yes</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={[styles.button, styles.noButton]} onPress={handleLogoutCancel}>
+                <Text style={styles.buttonText}>No</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </View>
+      </Modal>
     </View>
   );
 };
@@ -37,34 +61,59 @@ const Settings = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
   },
   headerContainer: {
-    backgroundColor: '#f9f9f9',
-    width: '100%',
+    flexDirection: 'row',
     alignItems: 'center',
-    borderBottomLeftRadius: 20,
-    borderBottomRightRadius: 20,
-    paddingTop: 20,
-    paddingBottom: 10,
+    justifyContent: 'space-between',
+    backgroundColor: 'lightblue',
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+    height: 70, // Adjust the height as needed
   },
   headerText: {
-    fontSize: 24,
+    color: 'black',
+    fontSize: 18,
     fontWeight: 'bold',
   },
-  stylishContainer: {
-    marginTop: 20,
+  contentContainer: {
+    flex: 1,
+    padding: 20,
+  },
+  modalContainer: {
+    flex: 1,
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    justifyContent: 'center',
     alignItems: 'center',
   },
-  image: {
-    width: 200,
-    height: 200,
-    borderRadius: 100,
-    marginBottom: 10,
+  modalContent: {
+    backgroundColor: 'white',
+    padding: 20,
+    borderRadius: 10,
   },
-  stylishText: {
+  confirmationText: {
     fontSize: 18,
+    marginBottom: 20,
+    textAlign: 'center',
+  },
+  buttonContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  button: {
+    borderRadius: 5,
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+  },
+  yesButton: {
+    backgroundColor: 'green',
+  },
+  noButton: {
+    backgroundColor: 'red',
+  },
+  buttonText: {
+    color: 'white',
+    fontSize: 16,
     fontWeight: 'bold',
   },
 });

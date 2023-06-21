@@ -1,5 +1,5 @@
-import React from 'react';
-import { View, TouchableOpacity, Image, StyleSheet, Text, ScrollView, FlatList } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, TouchableOpacity, Image, StyleSheet, Text, ScrollView, FlatList, StatusBar } from 'react-native';
 
 const quotes = [
   'The best way to predict the future is to create it.',
@@ -25,6 +25,19 @@ const quotes = [
 ];
 
 const Home = ({ navigation }) => {
+  const [greeting, setGreeting] = useState('');
+
+  useEffect(() => {
+    const currentHour = new Date().getHours();
+    if (currentHour < 12) {
+      setGreeting('Good Morning');
+    } else if (currentHour < 18) {
+      setGreeting('Good Afternoon');
+    } else {
+      setGreeting('Good Evening');
+    }
+  }, []);
+
   const goToProfile = () => {
     navigation.navigate('Profile');
   };
@@ -56,73 +69,102 @@ const Home = ({ navigation }) => {
   );
 
   return (
-    <ScrollView contentContainerStyle={styles.container}>
-      <View style={styles.buttonContainer}>
-        <TouchableOpacity style={styles.button} onPress={goToProfile}>
-          <Image
-            source={require('../assets/images/profile.png')}
-            style={styles.buttonImage}
-          />
-          <Text style={styles.buttonText}>Profile</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.button} onPress={goToUpdate}>
-          <Image
-            source={require('../assets/icons/update.png')}
-            style={styles.buttonImage}
-          />
-          <Text style={styles.buttonText}>Update</Text>
-        </TouchableOpacity>
-      </View>
-      <View style={styles.buttonContainer}>
-        <TouchableOpacity style={styles.button} onPress={goToTimeTable}>
-          <Image
-            source={require('../assets/icons/timetable.png')}
-            style={styles.buttonImage}
-          />
-          <Text style={styles.buttonText}>TimeTable</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.button} onPress={goToQuiz}>
-          <Image
-            source={require('../assets/icons/quiz.png')}
-            style={styles.buttonImage}
-          />
-          <Text style={styles.buttonText}>Quiz</Text>
-        </TouchableOpacity>
-      </View>
-      <View style={styles.buttonContainer}>
-        <TouchableOpacity style={styles.button} onPress={goToFees}>
-          <Image
-            source={require('../assets/icons/fees.png')}
-            style={styles.buttonImage}
-          />
-          <Text style={styles.buttonText}>Fees</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.button} onPress={goToCalendar}>
-          <Image
-            source={require('../assets/icons/calendar.png')}
-            style={styles.buttonImage}
-          />
-          <Text style={styles.buttonText}>Calendar</Text>
-        </TouchableOpacity>
-      </View>
-      <ScrollView horizontal>
-        <FlatList
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          data={quotes}
-          keyExtractor={(item, index) => index.toString()}
-          renderItem={renderQuoteItem}
+    <View style={styles.container}>
+      <View style={styles.header}>
+        <Image
+          source={require('../assets/images/htu1.png')}
+          style={styles.logo}
         />
+        <Text style={styles.headerText}>{greeting}</Text>
+      </View>
+      <ScrollView contentContainerStyle={styles.contentContainer}>
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity style={styles.button} onPress={goToProfile}>
+            <Image
+              source={require('../assets/images/profile.png')}
+              style={styles.buttonImage}
+            />
+            <Text style={styles.buttonText}>Profile</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.button} onPress={goToUpdate}>
+            <Image
+              source={require('../assets/icons/update.png')}
+              style={styles.buttonImage}
+            />
+            <Text style={styles.buttonText}>Update</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity style={styles.button} onPress={goToTimeTable}>
+            <Image
+              source={require('../assets/icons/timetable.png')}
+              style={styles.buttonImage}
+            />
+            <Text style={styles.buttonText}>TimeTable</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.button} onPress={goToQuiz}>
+            <Image
+              source={require('../assets/icons/quiz.png')}
+              style={styles.buttonImage}
+            />
+            <Text style={styles.buttonText}>Quiz</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity style={styles.button} onPress={goToFees}>
+            <Image
+              source={require('../assets/icons/fees.png')}
+              style={styles.buttonImage}
+            />
+            <Text style={styles.buttonText}>Fees</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.button} onPress={goToCalendar}>
+            <Image
+              source={require('../assets/icons/calendar.png')}
+              style={styles.buttonImage}
+            />
+            <Text style={styles.buttonText}>Calendar</Text>
+          </TouchableOpacity>
+        </View>
+        <ScrollView horizontal>
+          <FlatList
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            data={quotes}
+            keyExtractor={(item, index) => index.toString()}
+            renderItem={renderQuoteItem}
+          />
+        </ScrollView>
       </ScrollView>
-    </ScrollView>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flexGrow: 1,
-    justifyContent: 'center',
+    flex: 1,
+    backgroundColor: '#F5F5F5',
+  },
+  header: {
+    flexDirection: 'row',
     alignItems: 'center',
+    backgroundColor: '#8FBC8F',
+    paddingTop: StatusBar.currentHeight + 10,
+    paddingBottom: 10,
+    paddingLeft: 10,
+  },
+  logo: {
+    width: 40,
+    height: 40,
+    marginRight: 10,
+  },
+  headerText: {
+    color: '#FFF',
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+  contentContainer: {
+    padding: 10,
   },
   buttonContainer: {
     flexDirection: 'row',
@@ -145,7 +187,7 @@ const styles = StyleSheet.create({
   buttonImage: {
     width: 130,
     height: 120,
-    marginTop:80,
+    marginTop: 80,
   },
   buttonText: {
     marginTop: 10,
@@ -159,7 +201,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'lightgray',
     borderRadius: 10,
     marginHorizontal: 10,
-    marginTop:50,
+    marginTop: 50,
   },
   quoteText: {
     textAlign: 'center',

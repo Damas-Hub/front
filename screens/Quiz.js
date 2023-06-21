@@ -263,9 +263,9 @@ const Quiz = ({ navigation }) => {
             justifyContent: 'space-between',
             paddingTop: 40,
             paddingBottom: 20,
-            borderBottomLeftRadius: 10,
-            borderBottomRightRadius: 10,
-            backgroundColor: 'lightblue',
+            borderBottomLeftRadius:10,
+            borderBottomRightRadius:10,
+            backgroundColor:'lightblue',
             paddingHorizontal: 16,
           },
           title: {

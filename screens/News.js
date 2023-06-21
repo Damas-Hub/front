@@ -1,35 +1,49 @@
-import React from 'react';
-import { StyleSheet, View, Text, Image } from 'react-native';
- 
-
-const Header = () => {
-  return (
-    <View style={styles.headerContainer}>
-      <Text style={styles.headerText}>Welcome to HTU INFOSAGE</Text>
-    </View>
-  );
-};
-
-const StylishComponent = () => {
-  return (
-    <View style={styles.stylishContainer}>
-      <Image
-        source={require("../assets/icons/settings.png")} // Replace with the path to your image
-        style={styles.image}
-      />
-      {/* Add more components or content as needed */}
-    </View>
-  );
-};
+import React, { useEffect, useState } from 'react';
+import { View, Text, FlatList, TouchableOpacity, Image, StyleSheet } from 'react-native';
 
 const News = () => {
+  const [newsData, setNewsData] = useState([]);
+
+  useEffect(() => {
+    // Fetch news data from an API
+    fetchNewsData();
+  }, []);
+
+  const fetchNewsData = async () => {
+    try {
+      // Make an API request to fetch news data
+      const response = await fetch('https://api.example.com/news');
+      const data = await response.json();
+      setNewsData(data);
+    } catch (error) {
+      console.log('Error fetching news data:', error);
+    }
+  };
+
+  const handleArticlePress = (article) => {
+    // Navigate to the article details screen
+    // You can implement the navigation logic here
+    console.log('View article:', article.title);
+  };
+
+  const renderArticleItem = ({ item }) => (
+    <TouchableOpacity style={styles.articleContainer} onPress={() => handleArticlePress(item)}>
+      <Image source={{ uri: item.image }} style={styles.articleImage} />
+      <View style={styles.articleContent}>
+        <Text style={styles.articleTitle}>{item.title}</Text>
+        <Text style={styles.articleDescription}>{item.description}</Text>
+      </View>
+    </TouchableOpacity>
+  );
+
   return (
     <View style={styles.container}>
-    
-
-      <Header />
-      <StylishComponent />
-      {/* Add more components or content as needed */}
+      <FlatList
+        data={newsData}
+        renderItem={renderArticleItem}
+        keyExtractor={(item) => item.id.toString()}
+        contentContainerStyle={styles.listContainer}
+      />
     </View>
   );
 };
@@ -37,35 +51,37 @@ const News = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
+    backgroundColor: '#F5F5F5',
+    padding: 10,
   },
-  headerContainer: {
-    backgroundColor: '#f9f9f9',
-    width: '100%',
-    alignItems: 'center',
-    borderBottomLeftRadius: 20,
-    borderBottomRightRadius: 20,
-    paddingTop: 20,
+  listContainer: {
     paddingBottom: 10,
   },
-  headerText: {
-    fontSize: 24,
-    fontWeight: 'bold',
-  },
-  stylishContainer: {
-    marginTop: 20,
+  articleContainer: {
+    flexDirection: 'row',
     alignItems: 'center',
-  },
-  image: {
-    width: 200,
-    height: 200,
-    borderRadius: 100,
+    backgroundColor: '#FFFFFF',
+    borderRadius: 8,
     marginBottom: 10,
+    padding: 10,
   },
-  stylishText: {
-    fontSize: 18,
+  articleImage: {
+    width: 80,
+    height: 80,
+    borderRadius: 8,
+  },
+  articleContent: {
+    flex: 1,
+    marginLeft: 10,
+  },
+  articleTitle: {
+    fontSize: 16,
     fontWeight: 'bold',
+  },
+  articleDescription: {
+    fontSize: 14,
+    color: '#888888',
+    marginTop: 5,
   },
 });
 

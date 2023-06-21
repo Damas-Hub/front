@@ -1,32 +1,51 @@
 import React from 'react';
-import { StyleSheet, View, Text, Image } from 'react-native';
-
-const Header = () => {
-  return (
-    <View style={styles.headerContainer}>
-      <Text style={styles.headerText}>Welcome to HTU INFOSAGE</Text>
-    </View>
-  );
-};
-
-const StylishComponent = () => {
-  return (
-    <View style={styles.stylishContainer}>
-      <Image
-        source={require("../assets/images/profile.png")} // Replace with the path to your image
-        style={styles.image}
-      />
-      {/* Add more components or content as needed */}
-    </View>
-  );
-};
+import { View, Text, StyleSheet, StatusBar, TouchableOpacity, ScrollView } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
 
 const Notification = () => {
+  const navigation = useNavigation();
+
+  const handleGoBack = () => {
+    navigation.navigate('Home');
+  };
+
+  const notifications = [
+    {
+      id: 1,
+      title: 'Notification 1',
+      message: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+    },
+    {
+      id: 2,
+      title: 'Notification 2',
+      message: 'Nullam auctor arcu ac tortor ultrices consequat.',
+    },
+    {
+      id: 3,
+      title: 'Notification 3',
+      message: 'Phasellus eget magna lorem. Nunc ac feugiat enim.',
+    },
+  ];
+
   return (
     <View style={styles.container}>
-      <Header />
-      <StylishComponent />
-      {/* Add more components or content as needed */}
+      <StatusBar backgroundColor="#8FBC8F" barStyle="dark-content" />
+      <View style={styles.header}>
+        <TouchableOpacity onPress={handleGoBack}>
+          <Ionicons name="md-arrow-back" size={24} color="black" />
+        </TouchableOpacity>
+        <Text style={styles.headerText}>Notifications</Text>
+        <View style={{ flex: 1 }} />
+      </View>
+      <ScrollView contentContainerStyle={styles.scrollContainer}>
+        {notifications.map((notification) => (
+          <View key={notification.id} style={styles.notificationContainer}>
+            <Text style={styles.notificationTitle}>{notification.title}</Text>
+            <Text style={styles.notificationMessage}>{notification.message}</Text>
+          </View>
+        ))}
+      </ScrollView>
     </View>
   );
 };
@@ -34,35 +53,42 @@ const Notification = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
+    backgroundColor: '#F5F5F5',
   },
-  headerContainer: {
-    backgroundColor: '#f9f9f9',
-    width: '100%',
+  header: {
+    flexDirection: 'row',
     alignItems: 'center',
-    borderBottomLeftRadius: 20,
-    borderBottomRightRadius: 20,
-    paddingTop: 20,
+    backgroundColor: '#8FBC8F',
+    paddingTop: StatusBar.currentHeight + 10,
     paddingBottom: 10,
+    paddingHorizontal: 16,
+    height: 70,
   },
   headerText: {
+    flex: 1,
     fontSize: 24,
     fontWeight: 'bold',
+    color: '#FFF',
+    marginLeft: 10,
+    textAlign: 'center',
   },
-  stylishContainer: {
-    marginTop: 20,
-    alignItems: 'center',
+  scrollContainer: {
+    padding: 16,
   },
-  image: {
-    width: 200,
-    height: 200,
-    borderRadius: 100,
-    marginBottom: 10,
+  notificationContainer: {
+    backgroundColor: '#FFF',
+    padding: 16,
+    borderRadius: 8,
+    marginBottom: 16,
   },
-  stylishText: {
+  notificationTitle: {
     fontSize: 18,
     fontWeight: 'bold',
+    marginBottom: 8,
+  },
+  notificationMessage: {
+    fontSize: 16,
+    color: '#888',
   },
 });
 
