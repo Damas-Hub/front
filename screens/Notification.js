@@ -14,17 +14,17 @@ const Notification = () => {
     {
       id: 1,
       title: 'Notification 1',
-      message: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+      message: ' This is the first.',
     },
     {
       id: 2,
       title: 'Notification 2',
-      message: 'Nullam auctor arcu ac tortor ultrices consequat.',
+      message: '  This is the second.',
     },
     {
       id: 3,
       title: 'Notification 3',
-      message: 'Phasellus eget magna lorem. Nunc ac feugiat enim.',
+      message: ' This is the second.',
     },
   ];
 
