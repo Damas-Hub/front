@@ -8,7 +8,10 @@ const Profile = () => {
   const navigation = useNavigation();
 
   const studentData = {
-    name: 'John Doe',
+    firstName: 'John',
+    middleName: 'Robert',
+    lastName: 'Doe',
+    address: '123 Main St',
     program: 'Computer Science',
     indexNo: 'CS12345',
     dateOfBirth: '1998-05-15',
@@ -16,6 +19,7 @@ const Profile = () => {
     phoneNumber: '1234567890',
     level: 'Junior',
   };
+  
 
   return (
     <View style={{ flex: 1 }}>
@@ -29,9 +33,25 @@ const Profile = () => {
         <Image source={require('../assets/images/profile.png')} style={styles.profileImage} />
 
         <View style={styles.row}>
-          <Text style={styles.label}>Name:</Text>
-          <Text style={styles.value}>{studentData.name}</Text>
-        </View>
+  <Text style={styles.label}>First Name:</Text>
+  <Text style={styles.value}>{studentData.firstName}</Text>
+</View>
+
+<View style={styles.row}>
+  <Text style={styles.label}>Middle Name:</Text>
+  <Text style={styles.value}>{studentData.middleName}</Text>
+</View>
+
+<View style={styles.row}>
+  <Text style={styles.label}>Last Name:</Text>
+  <Text style={styles.value}>{studentData.lastName}</Text>
+</View>
+
+<View style={styles.row}>
+  <Text style={styles.label}>Address:</Text>
+  <Text style={styles.value}>{studentData.address}</Text>
+</View>
+
 
         <View style={styles.row}>
           <Text style={styles.label}>Program:</Text>
