@@ -16,7 +16,7 @@ const Stack = createStackNavigator();
 const NavScreens = () => {
   return (
     <Stack.Navigator
-      initialRouteName="BottomTabNavigator"
+      initialRouteName="Profile"
       screenOptions={{
         headerShown: false,
       }}
