@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, TextInput, Text, TouchableOpacity, StyleSheet, ScrollView, StatusBar, Image } from 'react-native';
+import { View, TextInput, Text, TouchableOpacity, StyleSheet, FlatList, StatusBar, Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
 import * as ImagePicker from 'expo-image-picker';
@@ -13,15 +13,13 @@ const styles = StyleSheet.create({
     paddingBottom: 20,
     borderBottomLeftRadius: 10,
     borderBottomRightRadius: 10,
-    backgroundColor: 'lightblue',
+    backgroundColor: '#0F52BA',
     paddingHorizontal: 16,
   },
   backArrow: {
     marginRight: 8,
     marginLeft: -7,
-    
   },
- 
   headerTitle: {
     fontSize: 20,
     fontWeight: 'bold',
@@ -93,15 +91,27 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#888',
   },
+  fileInput: {
+    textAlign: 'center',
+    fontSize: 16,
+    color: '#888',
+  },
 });
 
-const BackArrow = ({ onPress }) => {
+const BackArrow = () => {
+  const navigation = useNavigation();
+
+  const handleBackButtonPress = () => {
+    navigation.navigate('BottomTabNavigator'); // Replace 'BottomTabNavigator' with the appropriate screen name in your navigation stack
+  };
+
   return (
-    <TouchableOpacity style={styles.backArrow} onPress={onPress}>
+    <TouchableOpacity style={styles.backArrow} onPress={handleBackButtonPress}>
       <Ionicons name="arrow-back" size={24} color="black" />
     </TouchableOpacity>
   );
 };
+
 
 const Update = () => {
   const navigation = useNavigation();
@@ -146,15 +156,13 @@ const Update = () => {
     }
   };
 
-  return (
-    <View style={{ flex: 1 }}>
-      <StatusBar backgroundColor="lightblue" barStyle="dark-content" />
-      <View style={styles.header}>
-        <BackArrow onPress={() => navigation.navigate('Home')} />
-        <Text style={styles.headerTitle}>Update</Text>
-      </View>
-      <ScrollView contentContainerStyle={styles.container}>
+  const renderItem = ({ item }) => {
+    if (item === 'welcomeText') {
+      return (
         <Text style={styles.welcomeText}>Update Your Details Here</Text>
+      );
+    } else if (item === 'profileImageContainer') {
+      return (
         <View style={styles.profileImageContainer}>
           {profileImage ? (
             <Image source={{ uri: profileImage }} style={styles.profileImage} />
@@ -165,26 +173,40 @@ const Update = () => {
             <Text style={styles.fileInput}>Choose Image</Text>
           </TouchableOpacity>
         </View>
+      );
+    } else if (item === 'email') {
+      return (
         <TextInput
           style={styles.input}
           placeholder="Email"
           onChangeText={(text) => setEmail(text)}
           value={email}
           keyboardType="email-address"
+          autoCapitalize="none"
         />
+      );
+    } else if (item === 'phoneNumber') {
+      return (
         <TextInput
           style={styles.input}
           placeholder="Phone Number"
           onChangeText={(text) => setPhoneNumber(text)}
           value={phoneNumber}
-          keyboardType="phone-pad"
+          keyboardType="numeric"
+          autoCapitalize="none"
         />
+      );
+    } else if (item === 'dateOfBirth') {
+      return (
         <TextInput
           style={styles.input}
           placeholder="Date of Birth"
           onChangeText={(text) => setDateOfBirth(text)}
           value={dateOfBirth}
         />
+      );
+    } else if (item === 'password') {
+      return (
         <TextInput
           style={styles.input}
           placeholder="Password"
@@ -192,11 +214,45 @@ const Update = () => {
           value={password}
           secureTextEntry
         />
-        <View style={styles.space} />
+      );
+    } else if (item === 'space') {
+      return <View style={styles.space} />;
+    } else if (item === 'updateButton') {
+      return (
         <TouchableOpacity onPress={handleUpdate} style={[styles.button, styles.updateButton]}>
           <Text style={styles.buttonText}>Update</Text>
         </TouchableOpacity>
-      </ScrollView>
+      );
+    }
+
+    return null;
+  };
+
+  const data = [
+    'welcomeText',
+    'profileImageContainer',
+    'email',
+    'phoneNumber',
+    'dateOfBirth',
+    'password',
+    'space',
+    'updateButton',
+  ];
+
+  return (
+    <View style={{ flex: 1 }}>
+      <StatusBar backgroundColor="lightblue" barStyle="dark-content" />
+      <View style={styles.header}>
+        <BackArrow onPress={() => navigation.navigate('Home')} />
+        <Text style={styles.headerTitle}>Update</Text>
+      </View>
+      <FlatList
+        data={data}
+        renderItem={renderItem}
+        keyExtractor={(item) => item}
+        contentContainerStyle={styles.container}
+        showsVerticalScrollIndicator={false}
+      />
     </View>
   );
 };

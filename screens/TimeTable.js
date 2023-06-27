@@ -7,7 +7,7 @@ const Header = () => {
   const navigation = useNavigation();
 
   const goBack = () => {
-    navigation.navigate('Home'); // Replace 'Home' with the appropriate screen name for your home screen
+    navigation.navigate('BottomTabNavigator'); // Replace 'Home' with the appropriate screen name for your home screen
   };
 
   return (
@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
     paddingBottom: 20,
     borderBottomLeftRadius: 10,
     borderBottomRightRadius: 10,
-    backgroundColor: 'lightblue',
+    backgroundColor: '#0F52BA',
     paddingHorizontal: 16,
   },
   headerText: {

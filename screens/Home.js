@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, TouchableOpacity, Image, StyleSheet, Text, ScrollView, FlatList, StatusBar } from 'react-native';
+ 
 
 const quotes = [
   'The best way to predict the future is to create it.',
@@ -69,6 +70,7 @@ const Home = ({ navigation }) => {
   );
 
   return (
+     
     <View style={styles.container}>
       <View style={styles.header}>
         <Image
@@ -78,10 +80,11 @@ const Home = ({ navigation }) => {
         <Text style={styles.headerText}>{greeting}</Text>
       </View>
       <ScrollView contentContainerStyle={styles.contentContainer}>
+       
         <View style={styles.buttonContainer}>
           <TouchableOpacity style={styles.button} onPress={goToProfile}>
             <Image
-              source={require('../assets/images/profile.png')}
+              source={require('../assets/images/student.png')}
               style={styles.buttonImage}
             />
             <Text style={styles.buttonText}>Profile</Text>
@@ -134,6 +137,7 @@ const Home = ({ navigation }) => {
             keyExtractor={(item, index) => index.toString()}
             renderItem={renderQuoteItem}
           />
+           
         </ScrollView>
       </ScrollView>
     </View>
@@ -148,15 +152,19 @@ const styles = StyleSheet.create({
   header: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#8FBC8F',
-    paddingTop: StatusBar.currentHeight + 10,
+    backgroundColor: '#0F52BA',
+    paddingTop: StatusBar.currentHeight + 20,
     paddingBottom: 10,
     paddingLeft: 10,
+    borderBottomLeftRadius: 0,
+    borderBottomRightRadius: 20,
   },
   logo: {
-    width: 40,
-    height: 40,
+    width: 45,
+    height: 55,
     marginRight: 10,
+    
+
   },
   headerText: {
     color: '#FFF',

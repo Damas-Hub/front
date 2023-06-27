@@ -69,7 +69,7 @@ const Login = () => {
     <KeyboardAvoidingView style={styles.container} behavior="padding">
       <Text style={styles.welcomeText}>Welcome Back!</Text>
       <Image
-        source={require("./assets/images/login.jpeg")}
+        source={require("./assets/images/login.png")}
         style={styles.images}
       />
       <TextInput
@@ -108,7 +108,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     padding: 16,
-    // backgroundColor: '#ADD8E6', // Set background color to grey
+    // backgroundColor: '#0F52BA', // Set background color to grey
   },
   welcomeText: {
     fontSize: 24,

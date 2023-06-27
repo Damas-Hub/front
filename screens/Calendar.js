@@ -124,7 +124,7 @@ const Calendar = ({ navigation }) => {
   ];
 
   const handleGoBack = () => {
-    navigation.navigate("Home"); // Replace "Homepage" with the actual screen name for your homepage
+    navigation.navigate("BottomTabNavigator"); // Replace "Homepage" with the actual screen name for your homepage
   };
 
   return (
@@ -237,7 +237,7 @@ const styles = StyleSheet.create({
     paddingBottom: 20,
     borderBottomLeftRadius: 10,
     borderBottomRightRadius: 10,
-    backgroundColor: 'lightblue',
+    backgroundColor: '#0F52BA',
     paddingHorizontal: 16,
   
      

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, Text, TouchableOpacity, FlatList, SafeAreaView } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity, FlatList, SafeAreaView, StatusBar } from 'react-native';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 
 const Attendance = () => {
@@ -30,7 +30,11 @@ const Attendance = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.headerText}>Attendance App</Text>
+      <StatusBar barStyle="light-content" backgroundColor="#0F52BA" />
+      
+      <View style={styles.header}>
+        <Text style={styles.headerText}>Attendance</Text>
+      </View>
 
       <TouchableOpacity style={styles.button} onPress={showDatePicker}>
         <Text style={styles.buttonText}>
@@ -70,13 +74,21 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
+  },
+  header: {
+    backgroundColor: '#0F52BA',
+    borderBottomLeftRadius: 20,
+    borderBottomRightRadius: 20,
+    paddingVertical: 10,
     alignItems: 'center',
     justifyContent: 'center',
+    marginBottom: 20,
+    height: 80,
   },
   headerText: {
     fontSize: 24,
     fontWeight: 'bold',
-    marginBottom: 20,
+    color: '#fff',
   },
   button: {
     paddingHorizontal: 20,

@@ -13,7 +13,7 @@ const Splash = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <Image
-        source={require('./assets/images/login.jpeg')}
+        source={require('./assets/images/splash.png')}
         style={styles.logo}
         resizeMode="contain"
       />
@@ -26,11 +26,11 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#0F52BA',
   },
   logo: {
-    width: 200,
-    height: 200,
+    width: 400,
+    height: 400,
   },
 });
 

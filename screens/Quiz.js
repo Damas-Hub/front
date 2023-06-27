@@ -183,7 +183,7 @@ const Quiz = ({ navigation }) => {
         return (
         <View style={styles.container}>
         <View style={styles.header}>
-        <TouchableOpacity onPress={() => navigation.navigate('Home')}>
+        <TouchableOpacity onPress={() => navigation.navigate('BottomTabNavigator')}>
         <AntDesign name="arrowleft" size={24} color="white" />
         </TouchableOpacity>
         <Text style={styles.title}>Quiz</Text>  
@@ -204,7 +204,7 @@ const Quiz = ({ navigation }) => {
         return (
         <View style={styles.container}>
         <View style={styles.header}>
-        <TouchableOpacity onPress={() => navigation.navigate('Home')}>
+        <TouchableOpacity onPress={() => navigation.navigate('BottomTabNavigator')}>
         <AntDesign name="arrowleft" size={24} color="black" />
         </TouchableOpacity>
         <Text style={styles.title}>Quiz</Text>
@@ -265,7 +265,7 @@ const Quiz = ({ navigation }) => {
             paddingBottom: 20,
             borderBottomLeftRadius:10,
             borderBottomRightRadius:10,
-            backgroundColor:'lightblue',
+            backgroundColor:'#0F52BA',
             paddingHorizontal: 16,
           },
           title: {
