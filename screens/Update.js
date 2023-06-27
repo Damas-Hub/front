@@ -1,99 +1,14 @@
 import React, { useState } from 'react';
-import { View, TextInput, Text, TouchableOpacity, StyleSheet, ScrollView, StatusBar } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import { View, TextInput, Text, TouchableOpacity, StyleSheet, ScrollView, StatusBar, Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-
-const Update = () => {
-  const navigation = useNavigation();
-
-  const [email, setEmail] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState('');
-  const [dateOfBirth, setDateOfBirth] = useState('');
-  const [password, setPassword] = useState('');
-  const [profileImage, setProfileImage] = useState(null);
-
-  const handleUpdate = () => {
-    // Perform update logic here
-    console.log('Update button pressed');
-    console.log('Email:', email);
-    console.log('Phone Number:', phoneNumber);
-    console.log('Date of Birth:', dateOfBirth);
-    console.log('Password:', password);
-    console.log('Profile Image:', profileImage);
-  };
-
-  const handleProfileImageUpload = (event) => {
-    const file = event.target.files[0];
-    const reader = new FileReader();
-
-    reader.onload = (upload) => {
-      setProfileImage(upload.target.result);
-    };
-
-    if (file) {
-      reader.readAsDataURL(file);
-    }
-  };
-
-  return (
-    <View style={{ flex: 1 }}>
-      <StatusBar backgroundColor="lightblue" barStyle="dark-content" />
-      <View style={styles.header}>
-        <TouchableOpacity onPress={() => navigation.navigate('Home')}>
-          <Ionicons name="md-arrow-back" size={24} color="black" />
-        </TouchableOpacity>
-        <Text style={styles.headerTitle}>Update</Text>
-      </View>
-      <ScrollView contentContainerStyle={styles.container}>
-        <Text style={styles.welcomeText}>Update Your Details Here</Text>
-        <View style={styles.profileImageContainer}>
-          {profileImage ? (
-            <Image source={{ uri: profileImage }} style={styles.profileImage} />
-          ) : (
-            <Text style={styles.profileImagePlaceholder}>Select Profile Image</Text>
-          )}
-          <input type="file" accept="image/*" onChange={handleProfileImageUpload} />
-        </View>
-        <TextInput
-          style={styles.input}
-          placeholder="Email"
-          onChangeText={(text) => setEmail(text)}
-          value={email}
-          keyboardType="email-address"
-        />
-        <TextInput
-          style={styles.input}
-          placeholder="Phone Number"
-          onChangeText={(text) => setPhoneNumber(text)}
-          value={phoneNumber}
-          keyboardType="phone-pad"
-        />
-        <TextInput
-          style={styles.input}
-          placeholder="Date of Birth"
-          onChangeText={(text) => setDateOfBirth(text)}
-          value={dateOfBirth}
-        />
-        <TextInput
-          style={styles.input}
-          placeholder="Password"
-          onChangeText={(text) => setPassword(text)}
-          value={password}
-          secureTextEntry
-        />
-        <View style={styles.space} />
-        <TouchableOpacity onPress={handleUpdate} style={[styles.button, styles.updateButton]}>
-          <Text style={styles.buttonText}>Update</Text>
-        </TouchableOpacity>
-      </ScrollView>
-    </View>
-  );
-};
+import { Ionicons } from '@expo/vector-icons';
+import * as ImagePicker from 'expo-image-picker';
 
 const styles = StyleSheet.create({
   header: {
     flexDirection: 'row',
     alignItems: 'center',
+    justifyContent: 'center',
     paddingTop: 40,
     paddingBottom: 20,
     borderBottomLeftRadius: 10,
@@ -101,14 +16,20 @@ const styles = StyleSheet.create({
     backgroundColor: 'lightblue',
     paddingHorizontal: 16,
   },
+  backArrow: {
+    marginRight: 8,
+    marginLeft: -7,
+    
+  },
+ 
   headerTitle: {
     fontSize: 20,
     fontWeight: 'bold',
     textAlign: 'center',
+    flex: 1,
   },
   container: {
-    flexGrow: 1,
-    justifyContent: 'center',
+    flex: 1,
     padding: 16,
   },
   welcomeText: {
@@ -173,5 +94,111 @@ const styles = StyleSheet.create({
     color: '#888',
   },
 });
+
+const BackArrow = ({ onPress }) => {
+  return (
+    <TouchableOpacity style={styles.backArrow} onPress={onPress}>
+      <Ionicons name="arrow-back" size={24} color="black" />
+    </TouchableOpacity>
+  );
+};
+
+const Update = () => {
+  const navigation = useNavigation();
+
+  const [email, setEmail] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [dateOfBirth, setDateOfBirth] = useState('');
+  const [password, setPassword] = useState('');
+  const [profileImage, setProfileImage] = useState(null);
+
+  const handleUpdate = () => {
+    // Perform update logic here
+    console.log('Update button pressed');
+    console.log('Email:', email);
+    console.log('Phone Number:', phoneNumber);
+    console.log('Date of Birth:', dateOfBirth);
+    console.log('Password:', password);
+    console.log('Profile Image:', profileImage);
+  };
+
+  const handleProfileImageUpload = async () => {
+    try {
+      const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+
+      if (status !== 'granted') {
+        console.log('Permission to access media library denied');
+        return;
+      }
+
+      const result = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes: ImagePicker.MediaTypeOptions.Images,
+        allowsEditing: true,
+        aspect: [1, 1],
+        quality: 1,
+      });
+
+      if (!result.cancelled) {
+        setProfileImage(result.uri);
+      }
+    } catch (error) {
+      console.log('Error selecting image:', error);
+    }
+  };
+
+  return (
+    <View style={{ flex: 1 }}>
+      <StatusBar backgroundColor="lightblue" barStyle="dark-content" />
+      <View style={styles.header}>
+        <BackArrow onPress={() => navigation.navigate('Home')} />
+        <Text style={styles.headerTitle}>Update</Text>
+      </View>
+      <ScrollView contentContainerStyle={styles.container}>
+        <Text style={styles.welcomeText}>Update Your Details Here</Text>
+        <View style={styles.profileImageContainer}>
+          {profileImage ? (
+            <Image source={{ uri: profileImage }} style={styles.profileImage} />
+          ) : (
+            <Text style={styles.profileImagePlaceholder}>Select Profile Image</Text>
+          )}
+          <TouchableOpacity onPress={handleProfileImageUpload}>
+            <Text style={styles.fileInput}>Choose Image</Text>
+          </TouchableOpacity>
+        </View>
+        <TextInput
+          style={styles.input}
+          placeholder="Email"
+          onChangeText={(text) => setEmail(text)}
+          value={email}
+          keyboardType="email-address"
+        />
+        <TextInput
+          style={styles.input}
+          placeholder="Phone Number"
+          onChangeText={(text) => setPhoneNumber(text)}
+          value={phoneNumber}
+          keyboardType="phone-pad"
+        />
+        <TextInput
+          style={styles.input}
+          placeholder="Date of Birth"
+          onChangeText={(text) => setDateOfBirth(text)}
+          value={dateOfBirth}
+        />
+        <TextInput
+          style={styles.input}
+          placeholder="Password"
+          onChangeText={(text) => setPassword(text)}
+          value={password}
+          secureTextEntry
+        />
+        <View style={styles.space} />
+        <TouchableOpacity onPress={handleUpdate} style={[styles.button, styles.updateButton]}>
+          <Text style={styles.buttonText}>Update</Text>
+        </TouchableOpacity>
+      </ScrollView>
+    </View>
+  );
+};
 
 export default Update;

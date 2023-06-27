@@ -1,7 +1,15 @@
-import React from 'react';
+ import React from 'react';
 import { View, Text, StyleSheet, StatusBar, TouchableOpacity, ScrollView } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
+
+const BackArrow = ({ onPress }) => {
+  return (
+    <TouchableOpacity onPress={onPress}>
+      <Ionicons name="md-arrow-back" size={28} color="black" />
+    </TouchableOpacity>
+  );
+};
 
 const Notification = () => {
   const navigation = useNavigation();
@@ -14,17 +22,17 @@ const Notification = () => {
     {
       id: 1,
       title: 'Notification 1',
-      message: ' This is the first.',
+      message: 'This is the first.',
     },
     {
       id: 2,
       title: 'Notification 2',
-      message: '  This is the second.',
+      message: 'This is the second.',
     },
     {
       id: 3,
       title: 'Notification 3',
-      message: ' This is the second.',
+      message: 'This is the second.',
     },
   ];
 
@@ -32,9 +40,7 @@ const Notification = () => {
     <View style={styles.container}>
       <StatusBar backgroundColor="#8FBC8F" barStyle="dark-content" />
       <View style={styles.header}>
-        <TouchableOpacity onPress={handleGoBack}>
-          <Ionicons name="md-arrow-back" size={24} color="black" />
-        </TouchableOpacity>
+        <BackArrow onPress={handleGoBack} />
         <Text style={styles.headerText}>Notifications</Text>
         <View style={{ flex: 1 }} />
       </View>
@@ -58,6 +64,7 @@ const styles = StyleSheet.create({
   header: {
     flexDirection: 'row',
     alignItems: 'center',
+    justifyContent: 'center',
     backgroundColor: '#8FBC8F',
     paddingTop: StatusBar.currentHeight + 10,
     paddingBottom: 10,

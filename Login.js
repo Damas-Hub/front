@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+ 
 import {
   View,
   TextInput,
@@ -24,7 +25,7 @@ const Login = () => {
       return;
     }
 
-    fetch("http://192.168.43.62:8080/login", {
+    fetch("http://172.20.10.2:8080/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -36,7 +37,7 @@ const Login = () => {
     })
       .then((res) => {
         if (res.ok) {
-          return re.json();
+          return res.json();
         } else if (res.status === 422) {
           throw new Error("User with that index Number does not exist");
         } else {
@@ -47,7 +48,7 @@ const Login = () => {
         try {
           await AsyncStorage.setItem("token", data.token);
           Alert.alert("Success", "Login Successful!");
-          navigation.navigate("Home");
+          navigation.navigate("BottomTabNavigator");
         } catch (e) {
           console.log("Error logging in", e);
           Alert.alert("Error", "Something went wrong. Please try again");
