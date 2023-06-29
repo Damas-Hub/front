@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "front",
-    "slug": "front",
+    "name": "Student Information System",
+    "slug": "Student-Information-System",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
