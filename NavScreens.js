@@ -10,6 +10,10 @@ import TimeTable from './screens/TimeTable';
 import Quiz from './screens/Quiz';
 import Fees from './screens/Fees';
 import Home from './screens/Home'; // Import the Home component
+import Payment from './screens/Payment';
+import Logo from './screens/Logo';
+ 
+
 
 const Stack = createStackNavigator();
 
@@ -31,6 +35,9 @@ const NavScreens = () => {
       <Stack.Screen name="Update" component={Update} />
       <Stack.Screen name="BottomTabNavigator" component={BottomTabNavigator} />
       <Stack.Screen name="Home" component={Home} />
+      <Stack.Screen name="Payment" component={Payment} />
+      <Stack.Screen name="Logo" component={Logo} />
+
     </Stack.Navigator>
   );
 };

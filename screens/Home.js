@@ -158,11 +158,13 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     borderBottomLeftRadius: 0,
     borderBottomRightRadius: 20,
+    height:100,
   },
   logo: {
     width: 45,
     height: 55,
     marginRight: 10,
+     
     
 
   },
@@ -182,23 +184,19 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 10,
-    height: 130,
+    height: 150,
     paddingHorizontal: 20,
     paddingVertical: 10,
-    shadowColor: 'black',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.3,
-    shadowRadius: 8,
-    elevation: 10,
     marginLeft: 20,
   },
   buttonImage: {
     width: 130,
-    height: 120,
+    height: 130,
     marginTop: 80,
+   
   },
   buttonText: {
-    marginTop: 10,
+    marginTop: 2,
     textAlign: 'center',
     fontWeight: 'bold',
   },
@@ -206,7 +204,7 @@ const styles = StyleSheet.create({
     width: 300,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'lightgray',
+    backgroundColor: 'white',
     borderRadius: 10,
     marginHorizontal: 10,
     marginTop: 50,

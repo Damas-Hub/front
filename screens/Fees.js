@@ -148,9 +148,17 @@ const Fees = ({ navigation }) => {
       <Text style={styles.note}>
         5. To qualify for registration of courses for the semester, students must pay at least 60% of the total of their fees in the first semester and pay the remaining in the second semester.
       </Text>
+      <TouchableOpacity
+        style={styles.paymentButton}
+        onPress={() => navigation.navigate('Payment')}
+      >
+        <Text style={styles.paymentButtonText}>Click To Pay Fees</Text>
+      </TouchableOpacity>
     </ScrollView>
+    
   );
 };
+
 
 const styles = StyleSheet.create({
   container: {
@@ -192,6 +200,18 @@ const styles = StyleSheet.create({
   },
   note: {
     marginTop: 10,
+  },
+  paymentButton: {
+    marginTop: 20,
+    backgroundColor: '#0F52BA',
+    paddingVertical: 12,
+    borderRadius: 8,
+  },
+  paymentButtonText: {
+    color: 'white',
+    textAlign: 'center',
+    fontWeight: 'bold',
+    fontSize: 16,
   },
 });
 
