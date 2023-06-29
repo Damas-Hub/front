@@ -66,12 +66,13 @@ const Fees = ({ navigation }) => {
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      <View style={styles.header}>
-        <TouchableOpacity onPress={() => navigation.goBack()}>
-          <Ionicons name="arrow-back" size={24} color="black" />
-        </TouchableOpacity>
-        <Text style={styles.title}>Fees</Text>
-      </View>
+     <View style={styles.header}>
+  <TouchableOpacity onPress={() => navigation.goBack()}>
+    <Ionicons name="arrow-back" size={24} color="white" />
+  </TouchableOpacity>
+  <Text style={[styles.title, { color: 'white' }]}>Fees</Text>
+</View>
+
 
       <Text style={styles.title}>APPROVED FEES FOR 2022/2023 ACADEMIC YEAR – REGULAR</Text>
 
@@ -163,7 +164,7 @@ const Fees = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flexGrow: 1,
-    padding: 20,
+    padding: 2,
   },
   header: {
     flexDirection: 'row',

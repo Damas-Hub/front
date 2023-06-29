@@ -44,7 +44,7 @@ const Profile = () => {
       <StatusBar backgroundColor="lightblue" barStyle="dark-content" />
       <View style={styles.header}>
         <TouchableOpacity onPress={() => navigation.navigate('BottomTabNavigator')}>
-          <Ionicons name="md-arrow-back" size={30} color="black" style={styles.arrowIcon} />
+          <Ionicons name="md-arrow-back" size={30} color="white" style={styles.arrowIcon} />
         </TouchableOpacity>
         <Text style={styles.headerText}>Profile</Text>
       </View>
@@ -77,6 +77,9 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
     textAlign: 'center',
+    color: '#fff',
+    marginTop: -10,
+    
   },
   container: {
     flex: 1,

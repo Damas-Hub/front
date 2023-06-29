@@ -1,4 +1,3 @@
- // Settings.js
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Modal } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
@@ -7,10 +6,6 @@ import { useNavigation } from '@react-navigation/native';
 const Settings = () => {
   const navigation = useNavigation();
   const [showConfirmation, setShowConfirmation] = useState(false);
-
-  const handleGoBack = () => {
-    navigation.navigate('Home');
-  };
 
   const handleLogout = () => {
     setShowConfirmation(true);
@@ -28,12 +23,9 @@ const Settings = () => {
   return (
     <View style={styles.container}>
       <View style={styles.headerContainer}>
-        <TouchableOpacity onPress={handleGoBack}>
-          <Ionicons name="md-arrow-back" size={24} color="black" />
-        </TouchableOpacity>
         <Text style={styles.headerText}>Settings</Text>
         <TouchableOpacity onPress={handleLogout}>
-          <Ionicons name="log-out" size={30} color="red" />
+          <Ionicons name="log-out" size={40} color="red" />
         </TouchableOpacity>
       </View>
       <View style={styles.contentContainer}>
@@ -69,12 +61,16 @@ const styles = StyleSheet.create({
     backgroundColor: '#0F52BA',
     paddingHorizontal: 20,
     paddingVertical: 10,
-    height: 70, // Adjust the height as needed
+    height: 90, 
+    borderBottomLeftRadius: 20,
+    borderBottomRightRadius: 20,// Adjust the height as needed
   },
   headerText: {
-    color: 'black',
-    fontSize: 18,
+    color: 'white',
+    fontSize: 24,
     fontWeight: 'bold',
+    textAlign: 'center',
+    marginTop: 10,
   },
   contentContainer: {
     flex: 1,

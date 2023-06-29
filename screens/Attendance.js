@@ -83,12 +83,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginBottom: 20,
-    height: 80,
+    height: 85,
   },
   headerText: {
     fontSize: 24,
     fontWeight: 'bold',
     color: '#fff',
+    marginTop: 10,
   },
   button: {
     paddingHorizontal: 20,

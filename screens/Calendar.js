@@ -132,9 +132,9 @@ const Calendar = ({ navigation }) => {
     <ScrollView contentContainerStyle={styles.container}>
      <View style={[styles.header, styles.headerWithBorderRadius]}>
         <TouchableOpacity onPress={handleGoBack}>
-          <Ionicons name="arrow-back" size={24} color="#333" style={styles.goBackIcon} />
+          <Ionicons name="arrow-back" size={30} color="white" style={styles.goBackIcon} />
         </TouchableOpacity>
-        <Text style={styles.headerTitle}>Calendar</Text>
+        <Text style={[styles.headerTitle, { color: 'white' }]}>Calendar</Text>
       </View>
       <Text style={styles.title}>ACADEMIC CALENDAR</Text>
       <Text style={styles.subtitle}>
@@ -227,7 +227,7 @@ const Calendar = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flexGrow: 1,
-    padding: 16,
+    padding: 1,
   },
   header: {
     flexDirection: 'row',
@@ -256,6 +256,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginLeft: 16,
     alignItems: 'center',
+
      
     
   },

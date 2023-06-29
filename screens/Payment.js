@@ -61,7 +61,7 @@ const ImageComponent = () => (
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginHorizontal: 15,
+    marginHorizontal: -1,
   },
   header: {
     backgroundColor: "#0F52BA",
@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
     borderBottomLeftRadius: 20,
     borderBottomRightRadius: 20,
     marginTop: StatusBar.currentHeight || 0,
-    height: 70,
+    height: 85,
     flexDirection: "row",
     alignItems: "center",
   },
@@ -87,22 +87,24 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   image: {
-    width: 400,
-    height: 600,
+    width: 300,
+    height: 500,
   },
   paystack: {
-    minWidth: "60%",
+    minWidth: "30%", // Adjust the value to your desired size
     backgroundColor: "#0F52BA",
     padding: 10,
     borderRadius: 15,
     justifyContent: "center",
     alignItems: "center",
-    borderBottomLeftRadius: 15,
-    borderBottomRightRadius: 15,
+    borderBottomLeftRadius: 20,
+    borderBottomRightRadius: 20,
   },
+  
   pay: {
     color: "white",
     height:30,
+    fontSize: 20
   },
 });
 

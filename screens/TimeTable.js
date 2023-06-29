@@ -13,7 +13,7 @@ const Header = () => {
   return (
     <View style={styles.header}>
       <TouchableOpacity onPress={goBack}>
-        <Ionicons name="arrow-back" size={24} color="black" />
+        <Ionicons name="arrow-back" size={30} color="white" />
       </TouchableOpacity>
       <Text style={styles.headerText}>Time Table for Computer Science L300- Second Semester</Text>
     </View>
@@ -101,7 +101,7 @@ const TimeTable = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 10,
+    padding: 1,
   },
   header: {
     flexDirection: 'row',

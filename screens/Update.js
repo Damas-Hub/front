@@ -25,6 +25,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center',
     flex: 1,
+    color: '#fff',
   },
   container: {
     flex: 1,
@@ -107,7 +108,7 @@ const BackArrow = () => {
 
   return (
     <TouchableOpacity style={styles.backArrow} onPress={handleBackButtonPress}>
-      <Ionicons name="arrow-back" size={24} color="black" />
+      <Ionicons name="arrow-back" size={30} color="white" />
     </TouchableOpacity>
   );
 };

@@ -184,7 +184,7 @@ const Quiz = ({ navigation }) => {
         <View style={styles.container}>
         <View style={styles.header}>
         <TouchableOpacity onPress={() => navigation.navigate('BottomTabNavigator')}>
-        <AntDesign name="arrowleft" size={24} color="white" />
+        <AntDesign name="arrowleft" size={30} color="white" />
         </TouchableOpacity>
         <Text style={styles.title}>Quiz</Text>  
         <View style={{ flex: 1 }} />  
@@ -205,7 +205,7 @@ const Quiz = ({ navigation }) => {
         <View style={styles.container}>
         <View style={styles.header}>
         <TouchableOpacity onPress={() => navigation.navigate('BottomTabNavigator')}>
-        <AntDesign name="arrowleft" size={24} color="black" />
+        <AntDesign name="arrowleft" size={30} color="white" />
         </TouchableOpacity>
         <Text style={styles.title}>Quiz</Text>
         </View>
@@ -271,7 +271,7 @@ const Quiz = ({ navigation }) => {
           title: {
             fontSize: 20,
             fontWeight: 'bold',
-            color: 'black',
+            color: 'white',
             textAlign: 'center', // Added
             flex: 1, // Added
           },

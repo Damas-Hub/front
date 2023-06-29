@@ -1,23 +1,7 @@
- import React from 'react';
-import { View, Text, StyleSheet, StatusBar, TouchableOpacity, ScrollView } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
-import { useNavigation } from '@react-navigation/native';
-
-const BackArrow = ({ onPress }) => {
-  return (
-    <TouchableOpacity onPress={onPress}>
-      <Ionicons name="md-arrow-back" size={28} color="black" />
-    </TouchableOpacity>
-  );
-};
+import React from 'react';
+import { View, Text, StyleSheet, StatusBar, ScrollView } from 'react-native';
 
 const Notification = () => {
-  const navigation = useNavigation();
-
-  const handleGoBack = () => {
-    navigation.navigate('Home');
-  };
-
   const notifications = [
     {
       id: 1,
@@ -32,7 +16,7 @@ const Notification = () => {
     {
       id: 3,
       title: 'Notification 3',
-      message: 'This is the second.',
+      message: 'This is the third.',
     },
   ];
 
@@ -40,9 +24,7 @@ const Notification = () => {
     <View style={styles.container}>
       <StatusBar backgroundColor="#8FBC8F" barStyle="dark-content" />
       <View style={styles.header}>
-        <BackArrow onPress={handleGoBack} />
         <Text style={styles.headerText}>Notifications</Text>
-        <View style={{ flex: 1 }} />
       </View>
       <ScrollView contentContainerStyle={styles.scrollContainer}>
         {notifications.map((notification) => (
@@ -62,14 +44,14 @@ const styles = StyleSheet.create({
     backgroundColor: '#F5F5F5',
   },
   header: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    backgroundColor: '#0F52BA',
+    padding: 20,
+    borderBottomLeftRadius: 20,
+    borderBottomRightRadius: 20,
+    marginBottom: 10,
+    height: 90,
     justifyContent: 'center',
-    backgroundColor: '#8FBC8F',
-    paddingTop: StatusBar.currentHeight + 10,
-    paddingBottom: 10,
-    paddingHorizontal: 16,
-    height: 70,
+    alignItems: 'center',
   },
   headerText: {
     flex: 1,
@@ -78,6 +60,7 @@ const styles = StyleSheet.create({
     color: '#FFF',
     marginLeft: 10,
     textAlign: 'center',
+    marginTop:10
   },
   scrollContainer: {
     padding: 16,
