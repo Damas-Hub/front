@@ -6,7 +6,7 @@ const Splash = ({ navigation }) => {
     // Simulating a delay for demonstration purposes
     setTimeout(() => {
       // Navigate to the main screen or any other screen
-      navigation.replace('BottomTabNavigator');
+      navigation.replace('Login');
     }, 2000); // Splash screen duration in milliseconds
   }, []);
 

@@ -26,6 +26,7 @@ const Settings = () => {
         <Text style={styles.headerText}>Settings</Text>
         <TouchableOpacity onPress={handleLogout}>
           <Ionicons name="log-out" size={40} color="red" />
+          <Text style={styles.logoutText}>Logout</Text>
         </TouchableOpacity>
       </View>
       <View style={styles.contentContainer}>
@@ -53,6 +54,12 @@ const Settings = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  logoutText: {
+    color: 'red',
+    fontSize: 16,
+    fontWeight: 'bold',
+    textAlign: 'center',
   },
   headerContainer: {
     flexDirection: 'row',
