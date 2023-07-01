@@ -14,9 +14,16 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 const Profile = () => {
   const navigation = useNavigation();
   const [indexNo, setIndexNo] = useState("Loading");
-  const [email, SetEmail] = useState("Loading");
+  const [email, setEmail] = useState("Loading");
+  const [middleName, setMiddleName] = useState("");
+  const [address, setAddress] = useState("");
+  const [program, setProgram] = useState("");
+  const [dateOfBirth, setDateOfBirth] = useState("");
+  const [phoneNo, setPhoneNo] = useState("");
+  const [level, setLevel] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
 
-  // User details Callback and API callback
   useEffect(() => {
     async function fetchData() {
       const token = await AsyncStorage.getItem("token");
@@ -29,10 +36,22 @@ const Profile = () => {
       const data = await response.json();
       console.log(data);
       setIndexNo(data.indexNo);
-      SetEmail(data.email);
+      setEmail(data.email);
+      setAddress(data.address);
+      setProgram(data.program);
+      setDateOfBirth(data.dateOfBirth);
+      setLevel(data.level);
+      setMiddleName(data.middleName);
+      setPhoneNo(data.phoneNo);
+      setFirstName(data.firstName);
+      setLastName(data.lastName);
     }
     fetchData();
   }, []);
+
+  console.log("Index Number:", indexNo);
+  console.log("Email:", email);
+  // Add console.log statements for other variables as well
 
   return (
     <View style={{ flex: 1 }}>
@@ -55,8 +74,16 @@ const Profile = () => {
           source={require("../assets/images/student.png")}
           style={styles.profileImage}
         />
-        <Text>Index Number : {indexNo}</Text>
-        <Text>Email: {email}</Text>
+        <Text style={styles.text}>First Name: Hubert {firstName}</Text>
+        <Text style={styles.text}>Last Name: Selormey{lastName}</Text>
+        <Text style={styles.text}>Middle Name:Mawuko {middleName}</Text>
+        <Text style={styles.text}>Address: Nutefe Mechanical Shop{address}</Text>
+        <Text style={styles.text}>Program: BTECH Computer Science {program}</Text>
+        <Text style={styles.text}>Index Number: mike1234 {indexNo}</Text>
+        <Text style={styles.text}>Date of Birth: 2002/8/25 {dateOfBirth}</Text>
+        <Text style={styles.text}>Email: selormeyh@gmail.com {email}</Text>
+        <Text style={styles.text}>Phone Number: 0203633237 {phoneNo}</Text>
+        <Text style={styles.text}>Level: 300 {level}</Text>
       </View>
     </View>
   );
@@ -71,7 +98,7 @@ const styles = StyleSheet.create({
     borderBottomRightRadius: 20,
   },
   arrowIcon: {
-    marginTop: 15, // Adjust the margin as needed to position the arrow downwards
+    marginTop: 15,
   },
   headerText: {
     fontSize: 20,
@@ -91,18 +118,9 @@ const styles = StyleSheet.create({
     borderRadius: 75,
     marginBottom: 20,
   },
-  row: {
-    flexDirection: "row",
-    alignItems: "center",
+  text: {
+    fontSize: 16,
     marginBottom: 10,
-  },
-  label: {
-    fontSize: 16,
-    fontWeight: "bold",
-    marginRight: 10,
-  },
-  value: {
-    fontSize: 16,
   },
 });
 

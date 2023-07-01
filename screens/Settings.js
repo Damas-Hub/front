@@ -1,11 +1,40 @@
-import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, Modal } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, TouchableOpacity, StyleSheet, Modal, Animated } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
+import { Picker } from '@react-native-picker/picker';
 
 const Settings = () => {
   const navigation = useNavigation();
   const [showConfirmation, setShowConfirmation] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [language, setLanguage] = useState('English');
+
+  const headerTextOpacity = useState(new Animated.Value(0))[0];
+  const settingsTextOpacity = useState(new Animated.Value(0))[0];
+  const subSettingsTextOpacity = useState(new Animated.Value(0))[0];
+
+  useEffect(() => {
+    Animated.timing(headerTextOpacity, {
+      toValue: 1,
+      duration: 500,
+      useNativeDriver: true,
+    }).start();
+
+    Animated.timing(settingsTextOpacity, {
+      toValue: 1,
+      duration: 500,
+      delay: 200,
+      useNativeDriver: true,
+    }).start();
+
+    Animated.timing(subSettingsTextOpacity, {
+      toValue: 1,
+      duration: 500,
+      delay: 400,
+      useNativeDriver: true,
+    }).start();
+  }, []);
 
   const handleLogout = () => {
     setShowConfirmation(true);
@@ -20,18 +49,58 @@ const Settings = () => {
     setShowConfirmation(false);
   };
 
+  const toggleDarkMode = () => {
+    setIsDarkMode(!isDarkMode);
+  };
+
+  const handleLanguageChange = (selectedLanguage) => {
+    setLanguage(selectedLanguage);
+  };
+
   return (
-    <View style={styles.container}>
-      <View style={styles.headerContainer}>
-        <Text style={styles.headerText}>Settings</Text>
+    <View style={[styles.container, isDarkMode && styles.darkModeContainer]}>
+      <View style={[styles.headerContainer, isDarkMode && styles.darkModeHeaderContainer]}>
+        <Animated.Text style={[styles.headerText, { opacity: headerTextOpacity }]}>Settings</Animated.Text>
         <TouchableOpacity onPress={handleLogout}>
-          <Ionicons name="log-out" size={40} color="red" />
-          <Text style={styles.logoutText}>Logout</Text>
+          <Ionicons name="log-out" size={40} color={isDarkMode ? 'white' : 'red'} />
+          <Animated.Text style={[styles.logoutText, isDarkMode && styles.darkModeLogoutText]}>Logout</Animated.Text>
         </TouchableOpacity>
       </View>
       <View style={styles.contentContainer}>
-        {/* Add your settings content here */}
+        <Animated.Text style={[styles.settingsText, { opacity: settingsTextOpacity }, isDarkMode && styles.darkModeText]}>
+          Language:
+        </Animated.Text>
+        <View style={styles.settingsRow}>
+          <Text style={[styles.subSettingsText, isDarkMode && styles.darkModeText]}>Select Language:</Text>
+          <Picker
+            style={[styles.picker, isDarkMode && styles.darkModePicker]}
+            selectedValue={language}
+            onValueChange={handleLanguageChange}
+          >
+            <Picker.Item label="English" value="English" />
+            <Picker.Item label="Spanish" value="Spanish" />
+            <Picker.Item label="French" value="French" />
+          </Picker>
+        </View>
+        <Animated.Text style={[styles.settingsText, { opacity: settingsTextOpacity }, isDarkMode && styles.darkModeText]}>
+          Developer: Hubert Selormey Mawuko
+        </Animated.Text>
+        <Animated.Text style={[styles.subSettingsText, { opacity: subSettingsTextOpacity }, isDarkMode && styles.darkModeText]}>
+          - iOS 12 or later
+        </Animated.Text>
+        <Animated.Text style={[styles.subSettingsText, { opacity: subSettingsTextOpacity }, isDarkMode && styles.darkModeText]}>
+          - Android 7.0 or later
+        </Animated.Text>
+        <Animated.Text style={[styles.settingsText, { opacity: settingsTextOpacity }, isDarkMode && styles.darkModeText]}>
+          App Version: 1.0.0
+        </Animated.Text>
       </View>
+      <TouchableOpacity style={[styles.darkModeButton, isDarkMode && styles.darkModeButtonActive]} onPress={toggleDarkMode}>
+        <Ionicons name={isDarkMode ? 'moon' : 'sunny'} size={24} color={isDarkMode ? 'white' : 'black'} />
+        <Text style={[styles.darkModeButtonText, isDarkMode && styles.darkModeButtonTextActive]}>
+          {isDarkMode ? 'Dark Mode' : 'Light Mode'}
+        </Text>
+      </TouchableOpacity>
       <Modal visible={showConfirmation} animationType="fade" transparent>
         <View style={styles.modalContainer}>
           <View style={styles.modalContent}>
@@ -54,12 +123,19 @@ const Settings = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: 'white',
+  },
+  darkModeContainer: {
+    backgroundColor: '#222',
   },
   logoutText: {
     color: 'red',
     fontSize: 16,
     fontWeight: 'bold',
     textAlign: 'center',
+  },
+  darkModeLogoutText: {
+    color: 'white',
   },
   headerContainer: {
     flexDirection: 'row',
@@ -68,9 +144,12 @@ const styles = StyleSheet.create({
     backgroundColor: '#0F52BA',
     paddingHorizontal: 20,
     paddingVertical: 10,
-    height: 90, 
+    height: 90,
     borderBottomLeftRadius: 20,
-    borderBottomRightRadius: 20,// Adjust the height as needed
+    borderBottomRightRadius: 20,
+  },
+  darkModeHeaderContainer: {
+    backgroundColor: '#222',
   },
   headerText: {
     color: 'white',
@@ -82,6 +161,29 @@ const styles = StyleSheet.create({
   contentContainer: {
     flex: 1,
     padding: 20,
+  },
+  settingsText: {
+    fontSize: 18,
+    marginBottom: 10,
+    opacity: 0,
+    transform: [{ translateY: 10 }],
+  },
+  subSettingsText: {
+    marginLeft: 10,
+    marginBottom: 5,
+    opacity: 0,
+    transform: [{ translateY: 10 }],
+  },
+  settingsRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 20,
+  },
+  picker: {
+    flex: 1,
+  },
+  darkModeText: {
+    color: 'white',
   },
   modalContainer: {
     flex: 1,
@@ -118,6 +220,27 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 16,
     fontWeight: 'bold',
+  },
+  darkModeButton: {
+    position: 'absolute',
+    bottom: 20,
+    right: 20,
+    flexDirection: 'row',
+    alignItems: 'center',
+    borderRadius: 5,
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    backgroundColor: 'white',
+    elevation: 5,
+  },
+  darkModeButtonActive: {
+    backgroundColor: 'black',
+  },
+  darkModeButtonText: {
+    marginLeft: 5,
+  },
+  darkModeButtonTextActive: {
+    color: 'white',
   },
 });
 

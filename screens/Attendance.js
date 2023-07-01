@@ -6,6 +6,7 @@ const Attendance = () => {
   const [isDatePickerVisible, setDatePickerVisible] = useState(false);
   const [selectedDate, setSelectedDate] = useState(null);
   const [attendanceHistory, setAttendanceHistory] = useState([]);
+  const [presenceStatus, setPresenceStatus] = useState(false);
 
   const showDatePicker = () => {
     setDatePickerVisible(true);
@@ -23,9 +24,13 @@ const Attendance = () => {
   const handleAttendance = () => {
     const attendanceData = {
       date: selectedDate,
-      status: 'Present',
+      status: presenceStatus ? 'Present' : 'Absent',
     };
     setAttendanceHistory([...attendanceHistory, attendanceData]);
+  };
+
+  const togglePresence = () => {
+    setPresenceStatus(!presenceStatus);
   };
 
   return (
@@ -40,6 +45,10 @@ const Attendance = () => {
         <Text style={styles.buttonText}>
           {selectedDate ? selectedDate.toDateString() : 'Select Date'}
         </Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity style={[styles.button, presenceStatus ? styles.presentButton : styles.absentButton]} onPress={togglePresence}>
+        <Text style={styles.buttonText}>{presenceStatus ? 'Present' : 'Absent'}</Text>
       </TouchableOpacity>
 
       <TouchableOpacity style={styles.button} onPress={handleAttendance}>
@@ -97,6 +106,12 @@ const styles = StyleSheet.create({
     backgroundColor: '#e1e1e1',
     borderRadius: 5,
     marginBottom: 10,
+  },
+  presentButton: {
+    backgroundColor: 'green',
+  },
+  absentButton: {
+    backgroundColor: 'red',
   },
   buttonText: {
     fontSize: 18,
