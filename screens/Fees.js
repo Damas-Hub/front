@@ -1,4 +1,4 @@
-import React from 'react';
+ import React from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
@@ -66,13 +66,12 @@ const Fees = ({ navigation }) => {
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
-     <View style={styles.header}>
-  <TouchableOpacity onPress={() => navigation.goBack()}>
-    <Ionicons name="arrow-back" size={24} color="white" />
-  </TouchableOpacity>
-  <Text style={[styles.title, { color: 'white' }]}>Fees</Text>
-</View>
-
+      <View style={styles.header}>
+        <TouchableOpacity onPress={() => navigation.goBack()}>
+          <Ionicons name="arrow-back" size={30} color="white" />
+        </TouchableOpacity>
+        <Text style={[styles.title, { color: 'white' }]}>Fees</Text>
+      </View>
 
       <Text style={styles.title}>APPROVED FEES FOR 2022/2023 ACADEMIC YEAR – REGULAR</Text>
 
@@ -156,15 +155,13 @@ const Fees = ({ navigation }) => {
         <Text style={styles.paymentButtonText}>Click To Pay Fees</Text>
       </TouchableOpacity>
     </ScrollView>
-    
   );
 };
-
 
 const styles = StyleSheet.create({
   container: {
     flexGrow: 1,
-    padding: 2,
+    padding: 1,
   },
   header: {
     flexDirection: 'row',
@@ -172,47 +169,57 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     paddingTop: 40,
     paddingBottom: 20,
-    borderBottomLeftRadius: 10,
-    borderBottomRightRadius: 10,
+    borderBottomLeftRadius: 20,
+    borderBottomRightRadius: 20,
     backgroundColor: '#0F52BA',
     paddingHorizontal: 16,
-  
+    height: 90,
   },
   backButton: {
     marginLeft: 10,
-    marginTop:20,
+    marginTop: 20,
     paddingBottom: 16,
-    
   },
   title: {
     flex: 1,
     textAlign: 'center',
     fontSize: 20,
     fontWeight: 'bold',
+    color: 'black',
   },
   heading: {
     fontSize: 16,
     fontWeight: 'bold',
     marginBottom: 10,
+    marginTop: 20,
   },
   programName: {
+    fontSize: 14,
     fontWeight: 'bold',
-    marginBottom: 5,
+    marginTop: 10,
+    color: 'blue'
   },
   note: {
     marginTop: 10,
+    color: 'red'
   },
   paymentButton: {
     marginTop: 20,
     backgroundColor: '#0F52BA',
-    paddingVertical: 12,
-    borderRadius: 8,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 5,
+    alignSelf: 'center',
+    height: 50,
+    marginLeft: 40,
+    marginRight:40,
+    width: 250
   },
   paymentButtonText: {
     color: 'white',
-    textAlign: 'center',
-    fontWeight: 'bold',
     fontSize: 16,
+    fontWeight: 'bold',
+    textAlign: 'center', // Align the text in the center
   },
 });
 

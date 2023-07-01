@@ -1,5 +1,4 @@
 import React, { useState } from "react";
- 
 import {
   View,
   TextInput,
@@ -13,15 +12,17 @@ import {
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 import { useNavigation } from "@react-navigation/native";
+import { Ionicons } from "@expo/vector-icons";
 
 const Login = () => {
   const navigation = useNavigation();
   const [indexNo, setIndexNo] = useState("");
   const [password, setPassword] = useState("");
+  const [passwordVisible, setPasswordVisible] = useState(false);
 
   const handleLogin = () => {
     if (!indexNo || !password) {
-      Alert.alert("Error", "Input fields can not be empty");
+      Alert.alert("Error", "Input fields cannot be empty");
       return;
     }
 
@@ -60,9 +61,8 @@ const Login = () => {
       });
   };
 
-  const handleForgotPassword = () => {
-    // Handle the Forgot Password action here
-    console.log("Forgot Password clicked");
+  const togglePasswordVisibility = () => {
+    setPasswordVisible(!passwordVisible);
   };
 
   return (
@@ -78,18 +78,25 @@ const Login = () => {
         onChangeText={(text) => setIndexNo(text)}
         value={indexNo}
       />
-      <TextInput
-        style={styles.input}
-        placeholder="Password"
-        onChangeText={(text) => setPassword(text)}
-        value={password}
-        secureTextEntry
-      />
-      <TouchableOpacity onPress={handleForgotPassword}>
-        <Text style={[styles.forgotPasswordText, styles.blueText]}>
-          Forgot Password
-        </Text>
-      </TouchableOpacity>
+      <View style={styles.passwordInputContainer}>
+        <TextInput
+          style={styles.passwordInput}
+          placeholder="Password"
+          onChangeText={(text) => setPassword(text)}
+          value={password}
+          secureTextEntry={!passwordVisible}
+        />
+        <TouchableOpacity
+          style={styles.passwordVisibilityButton}
+          onPress={togglePasswordVisibility}
+        >
+          <Ionicons
+            name={passwordVisible ? "eye-off" : "eye"}
+            size={24}
+            color="gray"
+          />
+        </TouchableOpacity>
+      </View>
       <View style={styles.space} />
       <TouchableOpacity
         onPress={() => {
@@ -139,11 +146,23 @@ const styles = StyleSheet.create({
     marginTop: 8,
     fontSize: 16, // Increase the font size
   },
-  forgotPasswordText: {
-    textAlign: "center",
+  passwordInputContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    borderColor: "gray",
+    borderWidth: 1,
+    marginBottom: 12,
+    paddingHorizontal: 8,
+    borderRadius: 15,
     marginTop: 8,
-    marginBottom: 8,
-    textDecorationLine: "underline",
+  },
+  passwordInput: {
+    flex: 1,
+    height: 45,
+    fontSize: 16,
+  },
+  passwordVisibilityButton: {
+    padding: 8,
   },
   button: {
     height: 45,
@@ -154,11 +173,6 @@ const styles = StyleSheet.create({
   },
   loginButton: {
     backgroundColor: "#000080",
-  },
-  blueText: {
-    color: "#006994", // Change the color to blue
-    fontSize: 16,
-    fontWeight: "bold",
   },
   buttonText: {
     color: "white",

@@ -15,7 +15,7 @@ const News = () => {
       </View>
       <View style={styles.content}>
         <Text style={styles.newsContent}>
-          This is some HTU news content.
+          This is HTU news website
         </Text>
         <Button
           title="Read More"
