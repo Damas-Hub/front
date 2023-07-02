@@ -97,7 +97,7 @@ const Home = ({ navigation }) => {
       height: 100,
     },
     logo: {
-      width: 45,
+      width: 55,
       height: 55,
       marginRight: 10,
     },
@@ -178,7 +178,7 @@ const Home = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Image source={require('../assets/images/htu1.png')} style={styles.logo} />
+        <Image source={require('../assets/images/login.png')} style={styles.logo} />
         <Text style={styles.headerText}>{greeting}</Text>
       </View>
       <ScrollView>

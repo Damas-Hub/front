@@ -152,7 +152,7 @@ const Fees = ({ navigation }) => {
         style={styles.paymentButton}
         onPress={() => navigation.navigate('Payment')}
       >
-        <Text style={styles.paymentButtonText}>Click To Pay Fees</Text>
+        <Text style={styles.paymentButtonText}>Pay Now</Text>
       </TouchableOpacity>
     </ScrollView>
   );

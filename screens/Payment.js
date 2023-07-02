@@ -42,7 +42,7 @@ const Payment = () => {
         onPress={() => paystackWebViewRef.current.startTransaction()}
         style={styles.paystack}
       >
-        <Text style={styles.pay}>Pay Now</Text>
+        <Text style={styles.pay}>Click To Pay Fees</Text>
       </TouchableOpacity>
     </View>
   );
@@ -51,7 +51,7 @@ const Payment = () => {
 const ImageComponent = () => (
   <View style={styles.imageContainer}>
     <Image
-      source={require("../assets/images/login.png")}
+      source={require("../assets/images/payment.jpeg")}
       style={styles.image}
       resizeMode="contain"
     />
@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   image: {
-    width: 300,
+    width: 500,
     height: 500,
   },
   paystack: {

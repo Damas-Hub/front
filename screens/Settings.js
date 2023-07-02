@@ -62,7 +62,7 @@ const Settings = () => {
       <View style={[styles.headerContainer, isDarkMode && styles.darkModeHeaderContainer]}>
         <Animated.Text style={[styles.headerText, { opacity: headerTextOpacity }]}>Settings</Animated.Text>
         <TouchableOpacity onPress={handleLogout}>
-          <Ionicons name="log-out" size={40} color={isDarkMode ? 'white' : 'red'} />
+          <Ionicons name="log-out" size={35} color={isDarkMode ? 'white' : 'red'} />
           <Animated.Text style={[styles.logoutText, isDarkMode && styles.darkModeLogoutText]}>Logout</Animated.Text>
         </TouchableOpacity>
       </View>
@@ -82,9 +82,7 @@ const Settings = () => {
             <Picker.Item label="French" value="French" />
           </Picker>
         </View>
-        <Animated.Text style={[styles.settingsText, { opacity: settingsTextOpacity }, isDarkMode && styles.darkModeText]}>
-          Developer: Hubert Selormey Mawuko
-        </Animated.Text>
+         
         <Animated.Text style={[styles.subSettingsText, { opacity: subSettingsTextOpacity }, isDarkMode && styles.darkModeText]}>
           - iOS 12 or later
         </Animated.Text>
@@ -93,6 +91,15 @@ const Settings = () => {
         </Animated.Text>
         <Animated.Text style={[styles.settingsText, { opacity: settingsTextOpacity }, isDarkMode && styles.darkModeText]}>
           App Version: 1.0.0
+        </Animated.Text>
+        <Animated.Text style={[styles.settingsText, { opacity: settingsTextOpacity }, isDarkMode && styles.darkModeText]}>
+          Developer: Hubert Selormey Mawuko
+        </Animated.Text>
+        <Animated.Text style={[styles.settingsText, { opacity: settingsTextOpacity }, isDarkMode && styles.darkModeText]}>
+          Developer: Joinice Agbo Dzidzor
+        </Animated.Text>
+        <Animated.Text style={[styles.settingsText, { opacity: settingsTextOpacity }, isDarkMode && styles.darkModeText]}>
+           App Name: InfoSage (HTU-SIS)
         </Animated.Text>
       </View>
       <TouchableOpacity style={[styles.darkModeButton, isDarkMode && styles.darkModeButtonActive]} onPress={toggleDarkMode}>
@@ -130,7 +137,7 @@ const styles = StyleSheet.create({
   },
   logoutText: {
     color: 'red',
-    fontSize: 16,
+    fontSize: 12,
     fontWeight: 'bold',
     textAlign: 'center',
   },
