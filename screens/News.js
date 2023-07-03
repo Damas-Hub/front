@@ -26,7 +26,7 @@ const News = () => {
         <Text style={styles.newsContent}>This is HTU news website</Text>
         <Button title="Read More" onPress={navigateToWebsite} style={styles.button} />
       </View>
-      <Swiper horizontal showsPagination={false} autoplay autoplayTimeout={4} loop>
+      <Swiper horizontal showsPagination={false} autoplay autoplayTimeout={1} loop>
         {pictureData.map((item) => (
           <Image key={item.id} source={item.source} style={styles.image} />
         ))}

@@ -93,10 +93,10 @@ const Settings = () => {
           App Version: 1.0.0
         </Animated.Text>
         <Animated.Text style={[styles.settingsText, { opacity: settingsTextOpacity }, isDarkMode && styles.darkModeText]}>
-          Developer: Hubert Selormey Mawuko
+          Developed By: Hubert Selormey Mawuko
         </Animated.Text>
         <Animated.Text style={[styles.settingsText, { opacity: settingsTextOpacity }, isDarkMode && styles.darkModeText]}>
-          Developer: Joinice Agbo Dzidzor
+          And Joinice Agbo Dzidzor
         </Animated.Text>
         <Animated.Text style={[styles.settingsText, { opacity: settingsTextOpacity }, isDarkMode && styles.darkModeText]}>
            App Name: InfoSage (HTU-SIS)
