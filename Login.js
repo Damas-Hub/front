@@ -25,7 +25,7 @@ const Login = () => {
       Alert.alert("Error", "Input fields cannot be empty");
       return;
     }
-
+  // Make a POST request to the server's /login endpoint with the index number and password
     fetch("http://172.20.10.2:8080/login", {
       method: "POST",
       headers: {
@@ -36,6 +36,7 @@ const Login = () => {
         password: password,
       }),
     })
+    // Check the response status and parse the JSON data
       .then((res) => {
         if (res.ok) {
           return res.json();
@@ -46,6 +47,7 @@ const Login = () => {
         }
       })
       .then(async (data) => {
+          // Store the JWT token in AsyncStorage upon successful login
         try {
           await AsyncStorage.setItem("token", data.token);
           Alert.alert("Success", "Login Successful!");
