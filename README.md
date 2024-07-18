@@ -9,3 +9,5 @@ Notifications: Real-time notifications for events, schedule changes, and importa
 Academic Resources: Access to academic materials, including timetables, course outlines, and study resources.
 Student Directory: A directory with information on fellow students, facilitating easy communication and networking.
 School Directory: A directory with information on school staff and departments, enabling students to find contact details and office hours easily.
+
+#The backend is a private repository
