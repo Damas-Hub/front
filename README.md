@@ -1,3 +1,4 @@
+
 InfoSage
 Overview
 InfoSage is a student mobile app designed to provide comprehensive information about school activities, schedules, events, and notifications. The app ensures that students stay informed and up-to-date with the latest school news and important announcements.
